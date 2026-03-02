@@ -7,6 +7,7 @@ import { getTranslator } from "@/utils/i18nContext";
 import bcrypt from "bcrypt";
 import { VerifyEmailTemplate } from "@/emails/VerifyEmailTemplate";
 import logger from "@/utils/logger";
+import { UserRole } from "@/generated/prisma/enums";
 
 export const signUpHandler = async (req: Request, res: Response) => {
   const t = getTranslator();
@@ -52,6 +53,14 @@ export const signUpHandler = async (req: Request, res: Response) => {
 
     const { email, firstName, lastName, password } = result.data;
 
+    // 🔎 Check header for register-type
+    const registerType = String(
+      req.headers["register-type"] || "",
+    ).toLowerCase();
+
+    const role =
+      registerType === "expert" ? UserRole.EXPERT : UserRole.CUSTOMER;
+
     const existingUser = await prisma.user.findFirst({
       where: { email },
     });
@@ -70,6 +79,7 @@ export const signUpHandler = async (req: Request, res: Response) => {
         firstName,
         lastName,
         passwordHash,
+        role,
       },
     });
 
