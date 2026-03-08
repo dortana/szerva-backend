@@ -12,10 +12,15 @@
   "Internal server error": "Belső szerverhiba",
   "Invalid email or password": "Érvénytelen e-mail vagy jelszó",
   "Invalid input": "Érvénytelen bemenet",
+  "Invalid location id": "Érvénytelen helyazonosító",
   "Invalid page or limit": "Érvénytelen oldal vagy limit",
   "Invalid verification code": "Érvénytelen ellenőrző kód",
   "Last name is required": "A vezetéknév kötelező",
   "Lastname must be at least 2 characters long": "A vezetéknévnek legalább 2 karakter hosszúnak kell lennie",
+  "Location added successfully.": "Helyszín sikeresen hozzáadva.",
+  "Location not found.": "Nem talált hely.",
+  "Location updated successfully.": "A helyszín sikeresen frissült.",
+  "Location with this city already exists.": "A helyszín ezzel a várossal már létezik.",
   "Logout successful.": "A kijelentkezés sikeres.",
   "No user found": "Nem talált felhasználó",
   "No user found with this email": "Nem találtak felhasználót ezzel az e-mail címmel",
@@ -29,10 +34,5 @@
   "Verification code must be 6 digits": "Az ellenőrző kódnak 6 számjegyűnek kell lennie",
   "Verification code must be numeric": "Az ellenőrző kódnak numerikusnak kell lennie",
   "Verification successful. You will recevice your new password within a few minutes by email.": "Az ellenőrzés sikeres. Az új jelszót néhány percen belül megkapja e-mailben.",
-  "Welcome to the ServePortal API": "Üdvözöljük a ServePortal API-nál",
-  "Invalid location id": "Érvénytelen helyazonosító",
-  "Location added successfully.": "Helyszín sikeresen hozzáadva.",
-  "Location not found.": "Nem talált hely.",
-  "Location updated successfully.": "A helyszín sikeresen frissült.",
-  "Location with this city already exists.": "A helyszín ezzel a várossal már létezik."
+  "Welcome to the ServePortal API": "Üdvözöljük a ServePortal API-nál"
 }

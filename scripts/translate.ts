@@ -2,7 +2,7 @@ import "dotenv/config";
 import fs from "fs";
 import path from "path";
 import * as deepl from "deepl-node";
-console.log(process.env.DEEPL_API_KEY);
+
 const deeplClient = new deepl.DeepLClient(process.env.DEEPL_API_KEY!);
 
 // Base file

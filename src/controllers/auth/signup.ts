@@ -3,14 +3,13 @@ import prisma from "@/config/db";
 import { z } from "zod";
 import { formatZodError, sendEmailWithTemplate } from "@/utils/functions";
 import crypto from "crypto";
-import { getTranslator } from "@/utils/i18nContext";
 import bcrypt from "bcrypt";
 import { VerifyEmailTemplate } from "@/emails/VerifyEmailTemplate";
 import logger from "@/utils/logger";
 import { UserRole } from "@/generated/prisma/enums";
+import { t } from "@/utils/i18nContext";
 
 export const signUpHandler = async (req: Request, res: Response) => {
-  const t = getTranslator();
   const signUpSchema = z.object({
     email: z
       .email({
@@ -53,7 +52,7 @@ export const signUpHandler = async (req: Request, res: Response) => {
 
     const { email, firstName, lastName, password } = result.data;
 
-    // 🔎 Check header for register-type
+    //  Check header for register-type
     const registerType = String(
       req.headers["register-type"] || "",
     ).toLowerCase();

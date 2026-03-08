@@ -1,10 +1,9 @@
 import type { Request, Response } from "express";
 import prisma from "@/config/db";
 import logger from "@/utils/logger";
-import { getTranslator } from "@/utils/i18nContext";
+import { t } from "@/utils/i18nContext";
 
 export const getLocations = async (req: Request, res: Response) => {
-  const t = getTranslator();
   try {
     const page = parseInt((req.query.page as string) || "1", 10);
     const search = (req.query.search as string) || "";

@@ -1,10 +1,9 @@
 import type { Request, Response } from "express";
 import prisma from "@/config/db";
-import { getTranslator } from "@/utils/i18nContext";
+import { t } from "@/utils/i18nContext";
 import logger from "@/utils/logger";
 
 export const logoutHandler = async (req: Request, res: Response) => {
-  const t = getTranslator();
   const userId = req.user?.userId!;
 
   try {

@@ -3,11 +3,10 @@ import prisma from "@/config/db";
 import { z } from "zod";
 import { formatZodError } from "@/utils/functions";
 import crypto from "crypto";
-import { getTranslator } from "@/utils/i18nContext";
+import { t } from "@/utils/i18nContext";
 import logger from "@/utils/logger";
 
 export const forgotPasswordHandler = async (req: Request, res: Response) => {
-  const t = getTranslator();
   const forgotPasswordSchema = z.object({
     email: z
       .email({

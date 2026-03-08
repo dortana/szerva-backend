@@ -1,12 +1,11 @@
 import type { Request, Response } from "express";
 import prisma from "@/config/db";
-import { getTranslator } from "@/utils/i18nContext";
+import { t } from "@/utils/i18nContext";
 import { z } from "zod";
 import { formatZodError } from "@/utils/functions";
 import logger from "@/utils/logger";
 
 export const addLocationHandler = async (req: Request, res: Response) => {
-  const t = getTranslator();
   const locationSchema = z.object({
     country: z.string().length(2, "Country must be 2-letter ISO code"),
 
@@ -74,8 +73,6 @@ export const addLocationHandler = async (req: Request, res: Response) => {
 };
 
 export const editLocationHandler = async (req: Request, res: Response) => {
-  const t = getTranslator();
-
   const querySchema = z.object({
     locationId: z.string().uuid("Invalid location id"),
   });

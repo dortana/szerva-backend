@@ -4,7 +4,7 @@ import type { Request, Response } from "express";
 import i18n from "i18n";
 import routes from "@/routes";
 import path from "path";
-import { getTranslator } from "./utils/i18nContext";
+import { t } from "@/utils/i18nContext";
 import { i18nContextMiddleware } from "./middlewares/i18nContextMiddleware";
 
 // const messagesDir =
@@ -14,7 +14,7 @@ import { i18nContextMiddleware } from "./middlewares/i18nContextMiddleware";
 
 i18n.configure({
   locales: ["en-US", "hu-HU"],
-  directory: path.join(process.cwd(), "./messages"),
+  directory: path.join(process.cwd(), "src/messages"),
   defaultLocale: "en-US",
   objectNotation: true,
 });
@@ -29,7 +29,6 @@ app.use(express.json());
 app.use("/api", routes);
 
 app.get("/", (req: Request, res: Response) => {
-  const t = getTranslator();
   return res.status(200).json({
     message:
       t("Welcome to the ServePortal API") + ` ==> ENV: ${process.env.NODE_ENV}`,
