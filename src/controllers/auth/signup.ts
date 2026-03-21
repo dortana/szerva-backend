@@ -53,12 +53,9 @@ export const signUpHandler = async (req: Request, res: Response) => {
     const { email, firstName, lastName, password } = result.data;
 
     //  Check header for register-type
-    const registerType = String(
-      req.headers["register-type"] || "",
-    ).toLowerCase();
+    const srouceApp = String(req.headers["source-app"] || "").toLowerCase();
 
-    const role =
-      registerType === "expert" ? UserRole.EXPERT : UserRole.CUSTOMER;
+    const role = srouceApp === "expert" ? UserRole.EXPERT : UserRole.CUSTOMER;
 
     const existingUser = await prisma.user.findFirst({
       where: { email },
@@ -83,7 +80,7 @@ export const signUpHandler = async (req: Request, res: Response) => {
     });
 
     await prisma.verification.deleteMany({
-      where: { email, expiresAt: { gt: new Date() } },
+      where: { email },
     });
 
     const code = generateCode();

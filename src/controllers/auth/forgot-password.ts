@@ -39,7 +39,7 @@ export const forgotPasswordHandler = async (req: Request, res: Response) => {
     }
 
     await prisma.verification.deleteMany({
-      where: { email, expiresAt: { gt: new Date() } },
+      where: { email },
     });
 
     const code = generateCode();
