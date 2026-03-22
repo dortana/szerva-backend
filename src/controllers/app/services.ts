@@ -1,5 +1,5 @@
 import { getServicesFromContentful } from "@/config/contentful/helper";
-import { getCurrentLanguage, getTranslator } from "@/utils/i18nContext";
+import { getCurrentLanguage, t } from "@/utils/i18nContext";
 import type { Request, Response } from "express";
 import logger from "@/utils/logger";
 import { Entry } from "contentful";
@@ -7,7 +7,6 @@ import { ServiceSkeleton } from "@/config/contentful/types";
 import { mapServiceBulk, mapSingleService } from "@/config/contentful/mappers";
 
 export const getServices = async (req: Request, res: Response) => {
-  const t = getTranslator();
   const locale = getCurrentLanguage();
   const slug = req.query.slug as string | undefined;
   const baseSlug = req.query.baseSlug as string | undefined;

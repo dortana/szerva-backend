@@ -3,16 +3,16 @@ import prisma from "@/config/db";
 import { z } from "zod";
 import { formatZodError, sendEmailWithTemplate } from "@/utils/functions";
 import crypto from "crypto";
-import { getTranslator } from "@/utils/i18nContext";
 import bcrypt from "bcrypt";
 import { createToken } from "@/utils/jwt";
 import { createSessionData, sanitizeUser } from "./verify";
 import { VerifyEmailTemplate } from "@/emails/VerifyEmailTemplate";
 import logger from "@/utils/logger";
 import { generateCode } from "./signup";
+import { t } from "@/utils/i18nContext";
+import { UserRole } from "@/generated/prisma/enums";
 
 export const loginHandler = async (req: Request, res: Response) => {
-  const t = getTranslator();
   const loginSchema = z.object({
     email: z
       .email({
@@ -59,6 +59,17 @@ export const loginHandler = async (req: Request, res: Response) => {
       });
     }
 
+    //  Check header for source-app
+    const srouceApp = String(req.headers["source-app"] || "").toLowerCase();
+    if (
+      srouceApp.toLowerCase() === "expert" &&
+      existingUser?.role !== UserRole.EXPERT
+    ) {
+      return res.status(409).json({
+        message: t("No user found with this email"),
+      });
+    }
+
     const isPasswordValid = await bcrypt.compare(
       password,
       existingUser.passwordHash,
@@ -89,7 +100,7 @@ export const loginHandler = async (req: Request, res: Response) => {
     }
 
     await prisma.verification.deleteMany({
-      where: { email, expiresAt: { gt: new Date() } },
+      where: { email },
     });
 
     const code = generateCode();

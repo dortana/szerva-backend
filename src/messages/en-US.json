@@ -12,10 +12,15 @@
   "Internal server error": "Internal server error",
   "Invalid email or password": "Invalid email or password",
   "Invalid input": "Invalid input",
+  "Invalid location id": "Invalid location id",
   "Invalid page or limit": "Invalid page or limit",
   "Invalid verification code": "Invalid verification code",
   "Last name is required": "Last name is required",
   "Lastname must be at least 2 characters long": "Lastname must be at least 2 characters long",
+  "Location added successfully.": "Location added successfully.",
+  "Location not found.": "Location not found.",
+  "Location updated successfully.": "Location updated successfully.",
+  "Location with this city already exists.": "Location with this city already exists.",
   "Logout successful.": "Logout successful.",
   "No user found": "No user found",
   "No user found with this email": "No user found with this email",
@@ -29,5 +34,5 @@
   "Verification code must be 6 digits": "Verification code must be 6 digits",
   "Verification code must be numeric": "Verification code must be numeric",
   "Verification successful. You will recevice your new password within a few minutes by email.": "Verification successful. You will recevice your new password within a few minutes by email.",
-  "Welcome to the ServePortal API": "Welcome to the ServePortal API"
+  "Welcome to the Szerva API": "Welcome to the Szerva API"
 }

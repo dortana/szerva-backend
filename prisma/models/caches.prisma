@@ -1,0 +1,10 @@
+model Cache {
+    id        String   @id @default(uuid())
+    key       String   @unique
+    value     Json
+    expiresAt DateTime
+    updatedAt DateTime @updatedAt
+
+    @@index([key])
+    @@map("caches")
+}

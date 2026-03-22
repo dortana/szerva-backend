@@ -1,10 +1,9 @@
-import { getTranslator } from "@/utils/i18nContext";
+import { t } from "@/utils/i18nContext";
 import type { Request, Response } from "express";
 import prisma from "@/config/db";
 import logger from "@/utils/logger";
 
 export const getUserInformation = async (req: Request, res: Response) => {
-  const t = getTranslator();
   const userId = req.user?.userId!;
   try {
     const existingUser = await prisma.user.findUnique({

@@ -39,13 +39,13 @@ export const VerifyEmailTemplate = ({
         <Text style={paragraph}>Not expecting this email?</Text>
         <Text style={paragraph}>
           Contact{" "}
-          <Link href="mailto:support@serveportal.com" style={link}>
-            support@serveportal.com
+          <Link href="mailto:support@szerva.com" style={link}>
+            support@szerva.com
           </Link>{" "}
           if you did not request this code.
         </Text>
       </Container>
-      <Text style={footer}>Securely powered by ServePortal.</Text>
+      <Text style={footer}>Securely powered by Szerva.</Text>
     </Body>
   </Html>
 );

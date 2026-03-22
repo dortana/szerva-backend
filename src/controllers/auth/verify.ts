@@ -4,7 +4,7 @@ import { z } from "zod";
 import { formatZodError, sendEmailWithTemplate } from "@/utils/functions";
 import { createToken, tokenMaxAge } from "@/utils/jwt";
 import crypto from "crypto";
-import { getTranslator } from "@/utils/i18nContext";
+import { t } from "@/utils/i18nContext";
 import bcrypt from "bcrypt";
 import { User } from "@/generated/prisma/client";
 import { NewPasswordEmailTemplate } from "@/emails/NewPasswordEmailTemplate";
@@ -26,7 +26,6 @@ const createVerifyEmailSchema = (t: (key: string) => string) =>
   });
 
 export const verifyEmailHandler = async (req: Request, res: Response) => {
-  const t = getTranslator();
   const schema = createVerifyEmailSchema(t);
 
   try {
@@ -89,7 +88,6 @@ export const forgotPasswordVerifyEmailHandler = async (
   req: Request,
   res: Response,
 ) => {
-  const t = getTranslator();
   const schema = createVerifyEmailSchema(t);
 
   try {
@@ -165,7 +163,6 @@ export const resendVerificationEmailHandler = async (
   req: Request,
   res: Response,
 ) => {
-  const t = getTranslator();
   const loginSchema = z.object({
     email: z
       .email({

@@ -1,5 +1,5 @@
 module.exports = {
-  input: undefined,
+  input: ["src/**/*.{ts,tsx,js,jsx}", "!src/generated/**/*"],
   output: "src/messages/$LOCALE.json",
   locales: ["en-US"],
   defaultValue: (lng, ns, key) => key,
@@ -11,19 +11,19 @@ module.exports = {
     js: [
       {
         lexer: "JavascriptLexer",
-        functions: ["t", "t.rich", "__"],
+        functions: ["t", "__"],
       },
     ],
     ts: [
       {
         lexer: "JavascriptLexer",
-        functions: ["t", "t.rich", "__"],
+        functions: ["t", "__"],
       },
     ],
     tsx: [
       {
         lexer: "JsxLexer",
-        functions: ["t", "t.rich", "__"],
+        functions: ["t", "__"],
       },
     ],
   },

@@ -3,13 +3,13 @@ import prisma from "@/config/db";
 import { z } from "zod";
 import { formatZodError, sendEmailWithTemplate } from "@/utils/functions";
 import crypto from "crypto";
-import { getTranslator } from "@/utils/i18nContext";
 import bcrypt from "bcrypt";
 import { VerifyEmailTemplate } from "@/emails/VerifyEmailTemplate";
 import logger from "@/utils/logger";
+import { UserRole } from "@/generated/prisma/enums";
+import { t } from "@/utils/i18nContext";
 
 export const signUpHandler = async (req: Request, res: Response) => {
-  const t = getTranslator();
   const signUpSchema = z.object({
     email: z
       .email({
@@ -52,6 +52,11 @@ export const signUpHandler = async (req: Request, res: Response) => {
 
     const { email, firstName, lastName, password } = result.data;
 
+    //  Check header for register-type
+    const srouceApp = String(req.headers["source-app"] || "").toLowerCase();
+
+    const role = srouceApp === "expert" ? UserRole.EXPERT : UserRole.CUSTOMER;
+
     const existingUser = await prisma.user.findFirst({
       where: { email },
     });
@@ -70,11 +75,12 @@ export const signUpHandler = async (req: Request, res: Response) => {
         firstName,
         lastName,
         passwordHash,
+        role,
       },
     });
 
     await prisma.verification.deleteMany({
-      where: { email, expiresAt: { gt: new Date() } },
+      where: { email },
     });
 
     const code = generateCode();

@@ -2,10 +2,9 @@ import type { Request, Response } from "express";
 import prisma from "@/config/db";
 import logger from "@/utils/logger";
 // import { UserRole } from "@/generated/prisma/enums";
-import { getTranslator } from "@/utils/i18nContext";
+import { t } from "@/utils/i18nContext";
 
 export const getExperts = async (req: Request, res: Response) => {
-  const t = getTranslator();
   try {
     const page = parseInt((req.query.page as string) || "1", 10);
     const firstName = (req.query.firstName as string) || "";

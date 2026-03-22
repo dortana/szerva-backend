@@ -1,5 +1,5 @@
 import { getCategoriesFromContentful } from "@/config/contentful/helper";
-import { getCurrentLanguage, getTranslator } from "@/utils/i18nContext";
+import { getCurrentLanguage, t } from "@/utils/i18nContext";
 import type { Request, Response } from "express";
 import logger from "@/utils/logger";
 import { Entry } from "contentful";
@@ -7,7 +7,6 @@ import { CategorySkeleton } from "@/config/contentful/types";
 import { mapCategory } from "@/config/contentful/mappers";
 
 export const getCategories = async (req: Request, res: Response) => {
-  const t = getTranslator();
   const locale = getCurrentLanguage();
   try {
     const categories = await getCategoriesFromContentful(locale);
