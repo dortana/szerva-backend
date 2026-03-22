@@ -1,11 +1,11 @@
-export const appName = "ServePortal";
+export const appName = "Szerva";
 export const appSlogan = "Your gateway to reliable expert";
 export const companyAddress = "1117 Budapest, Szerémi út 4.";
-export const companyEmail = "support@serveportal.com";
+export const companyEmail = "support@szerva.com";
 export const companyPhone = "+36 30 527 5249";
 export const socialLinks = {
-  facebook: "https://www.facebook.com/serveportal",
-  instagram: "https://www.instagram.com/serveportal",
-  youtube: "https://www.youtube.com/@serveportal",
-  linkedin: "https://www.linkedin.com/company/serveportal",
+  facebook: "https://www.facebook.com/szerva",
+  instagram: "https://www.instagram.com/szerva",
+  youtube: "https://www.youtube.com/@szerva",
+  linkedin: "https://www.linkedin.com/company/szerva",
 };

@@ -31,7 +31,7 @@ app.use("/api", routes);
 app.get("/", (req: Request, res: Response) => {
   return res.status(200).json({
     message:
-      t("Welcome to the ServePortal API") + ` ==> ENV: ${process.env.NODE_ENV}`,
+      t("Welcome to the Szerva API") + ` ==> ENV: ${process.env.NODE_ENV}`,
   });
 });
 
