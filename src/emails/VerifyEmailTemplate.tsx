@@ -23,11 +23,7 @@ export const VerifyEmailTemplate = ({
     <Head />
     <Body style={main}>
       <Container style={container}>
-        <Img
-          src={`https://serveportal.vercel.app/app_logo.png`}
-          alt="Logo"
-          style={logo}
-        />
+        <Img src={`https://szerva.com/app_logo.png`} alt="Logo" style={logo} />
         <Text style={tertiary}>Verify Your Identity</Text>
         <Heading style={secondary}>
           Dear {firstName}, Please enter the following code to verify your

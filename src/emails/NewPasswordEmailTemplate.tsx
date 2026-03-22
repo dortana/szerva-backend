@@ -23,11 +23,7 @@ export const NewPasswordEmailTemplate = ({
     <Head />
     <Body style={main}>
       <Container style={container}>
-        <Img
-          src={`https://serveportal.vercel.app/app_logo.png`}
-          alt="Logo"
-          style={logo}
-        />
+        <Img src={`https://szerva.com/app_logo.png`} alt="Logo" style={logo} />
         <Text style={tertiary}>New Password</Text>
         <Heading style={secondary}>
           Dear {firstName}, This is your new password. Please don{"'"}t share
