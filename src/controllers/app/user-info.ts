@@ -21,6 +21,9 @@ export const getUserInformation = async (req: Request, res: Response) => {
         status: true,
         verified: true,
         twoFactorEnabled: true,
+        onBoardingStatus: true,
+        dateOfBirth: true,
+        addresses: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -35,7 +38,7 @@ export const getUserInformation = async (req: Request, res: Response) => {
     const { id, ...rest } = existingUser;
 
     return res.status(200).json({
-      user: { useId: id, ...rest },
+      user: { userId: id, ...rest },
     });
   } catch (error) {
     logger.error("Get user info failed", {
