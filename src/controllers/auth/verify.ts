@@ -287,6 +287,7 @@ export const sanitizeUser = (user: User) => {
     email: user.email,
     role: user.role,
     emailVerified: user.emailVerified,
+    onBoardingStatus: user.onBoardingStatus,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
   };
