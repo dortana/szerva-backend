@@ -5,7 +5,10 @@ import { logoutHandler } from "@/controllers/app/logout";
 import { UserRole } from "@/generated/prisma/enums";
 import requiresAuth from "@/middlewares/auth";
 import { Router } from "express";
-import { getUserInformation } from "@/controllers/app/user-info";
+import {
+  getUserInformation,
+  updateUserInformation,
+} from "@/controllers/app/user-info";
 import { getExperts } from "@/controllers/app/experts";
 
 const router = Router();
@@ -24,6 +27,7 @@ router.use(
   ),
 );
 router.get("/me", getUserInformation);
+router.put("/me", updateUserInformation);
 router.get("/logout", logoutHandler);
 
 export default router;

@@ -50,3 +50,54 @@ export const getUserInformation = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const updateUserInformation = async (req: Request, res: Response) => {
+  const userId = req.user?.userId!;
+
+  try {
+    const { firstName, lastName, dateOfBirth } = req.body;
+
+    const existingUser = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!existingUser) {
+      return res.status(404).json({
+        message: t("No user found"),
+      });
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        firstName,
+        lastName,
+        dateOfBirth,
+      },
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+        phone: true,
+        image: true,
+        dateOfBirth: true,
+        updatedAt: true,
+      },
+    });
+
+    const { id, ...rest } = updatedUser;
+
+    return res.status(200).json({
+      user: { userId: id, ...rest },
+    });
+  } catch (error) {
+    logger.error("Update user info failed", {
+      error,
+    });
+
+    return res.status(500).json({
+      message: t("Internal server error"),
+    });
+  }
+};
