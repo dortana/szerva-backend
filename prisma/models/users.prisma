@@ -1,31 +1,46 @@
 model User {
-    id String @id @default(uuid())
+    id               String @id @default(uuid())
 
-    firstName String
-    lastName  String
+    firstName        String
+    lastName         String
 
-    email         String    @unique
-    emailVerified DateTime?
-    phone         String?   @unique
-    phoneVerified DateTime?
+    email            String    @unique
+    emailVerified    DateTime?
+    phone            String?   @unique
+    phoneVerified    DateTime?
 
-    passwordHash String
+    passwordHash     String
 
-    image  String?
-    role   UserRole   @default(CUSTOMER)
-    status UserStatus @default(NEW)
+    image            String?
+    role             UserRole   @default(CUSTOMER)
+    status           UserStatus @default(NEW)
 
-    verified Boolean @default(false)
+    dateOfBirth      DateTime?
+
+    addresses        Address[]
+
+    verified         Boolean @default(false)
 
     twoFactorEnabled Boolean @default(false)
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @default(now()) @updatedAt
+    onBoardingStatus OnBoardingStatus? @default(NOT_STARTED)
+    expertiseDetails Expertise[]
 
-    sessions Session[]
-    orders   Order[]
+    documents        Document[]
+
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @default(now()) @updatedAt
+
+    sessions         Session[]
+
+    userOrders       Order[] @relation("OrderUser")
+    expertOrders     Order[] @relation("OrderExpert")
+
+    reviewsGiven     Review[] @relation("ReviewAuthor")
+    reviewsReceived  Review[] @relation("ReviewTarget")
 
     @@map("users")
+  
 }
 
 enum UserRole {
@@ -42,4 +57,15 @@ enum UserStatus {
     DISABLED
     NEW
     DELETED
+}
+
+enum OnBoardingStatus {
+    NOT_STARTED
+    PERSONAL_INFO
+    PHONE_VERIFICATION
+    ADDRESS_INFO
+    EXPERTISE_INFO
+    DOCUMENTS_UPLOAD
+    UNDER_REVIEW
+    COMPLETED
 }

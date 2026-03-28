@@ -1,0 +1,37 @@
+model Document {
+  id        String @id @default(uuid())
+
+  type      DocumentType
+  size      Int
+  fileUrl   String
+
+  number    String?
+  expiry    DateTime?
+
+  status    DocumentStatus @default(PENDING)
+  reason    String?
+
+  userId    String
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("documents")
+}
+
+enum DocumentType {
+  ID_CARD
+  DRIVER_LICENSE
+  PASSPORT
+  UTILITY_BILL
+  ADDRESS_CARD
+  BUSINESS_LICENSE
+  OTHER
+}
+
+enum DocumentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
