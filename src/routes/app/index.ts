@@ -14,6 +14,10 @@ import {
   sendPhoneVerificationHandler,
   verifyPhoneHandler,
 } from "@/controllers/auth/verify";
+import {
+  newAddressHandler,
+  searchAddressHandler,
+} from "@/controllers/app/addresses";
 
 const router = Router();
 
@@ -34,6 +38,10 @@ router.get("/me", getUserInformation);
 router.put("/me", updateUserInformation);
 router.post("/me/send-phone-verification", sendPhoneVerificationHandler);
 router.post("/me/verify-phone", verifyPhoneHandler);
+
+router.get("/me/search-address", searchAddressHandler);
+router.post("/me/add-address", newAddressHandler);
+
 router.get("/logout", logoutHandler);
 
 export default router;

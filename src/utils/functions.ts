@@ -3,6 +3,7 @@ import { DeleteObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import { ZodError } from "zod";
 import { Resend } from "resend";
 import { appName } from "./app_data";
+import { MapboxFeature } from "./addressUtils";
 
 export const formatZodError = (error: ZodError) => {
   return error.issues.map((issue) => ({
@@ -134,4 +135,27 @@ export const sendSMS = async ({ to, text }: { to: string; text: string }) => {
 
     throw error; // let caller handle it
   }
+};
+
+export const searchAddress = async (
+  query: string,
+): Promise<MapboxFeature[]> => {
+  const MAPBOX_TOKEN = process.env.MAPBOX_TOKEN;
+
+  if (!MAPBOX_TOKEN) {
+    throw new Error("Missing MAPBOX_TOKEN");
+  }
+
+  const res = await fetch(
+    `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+      query,
+    )}.json?access_token=${MAPBOX_TOKEN}&country=hu&types=address&autocomplete=true&limit=10&language=hu`,
+  );
+
+  if (!res.ok) {
+    throw new Error("Mapbox request failed");
+  }
+
+  const data = await res.json();
+  return data.features;
 };

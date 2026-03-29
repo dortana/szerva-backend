@@ -10,7 +10,7 @@ import { createToken, tokenMaxAge } from "@/utils/jwt";
 import crypto from "crypto";
 import { t } from "@/utils/i18nContext";
 import bcrypt from "bcrypt";
-import { OnBoardingStatus, User } from "@/generated/prisma/client";
+import { OnBoardingStatus, User, UserRole } from "@/generated/prisma/client";
 import { NewPasswordEmailTemplate } from "@/emails/NewPasswordEmailTemplate";
 import logger from "@/utils/logger";
 import { ApiError } from "@/utils/api-error";
@@ -134,7 +134,7 @@ export const verifyPhoneHandler = async (req: Request, res: Response) => {
       }
 
       if (
-        user.role === "EXPERT" &&
+        user.role === UserRole.EXPERT &&
         user.onBoardingStatus === OnBoardingStatus.PHONE_VERIFICATION
       ) {
         user = await tx.user.update({

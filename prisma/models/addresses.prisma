@@ -5,8 +5,15 @@ model Address {
   addressLine2 String?
   city         String
   state        String?
-  postalCode   String?
+  postalCode   String
   country      String
+  countryCode  String
+
+  unit         String? // apartment / door number
+  floor        String? // floor
+  building     String? // building name / block / entrance
+  entrance     String? // staircase / подъезд / lépcsőház
+  notes        String? // delivery instructions
 
   userId       String
   user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
