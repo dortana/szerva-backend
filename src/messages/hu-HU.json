@@ -34,5 +34,8 @@
   "Verification code must be 6 digits": "Az ellenőrző kódnak 6 számjegyűnek kell lennie",
   "Verification code must be numeric": "Az ellenőrző kódnak numerikusnak kell lennie",
   "Verification successful. You will recevice your new password within a few minutes by email.": "Az ellenőrzés sikeres. Az új jelszót néhány percen belül megkapja e-mailben.",
-  "Welcome to the Szerva API": "Üdvözöljük a Szerva API-nál"
+  "Welcome to the Szerva API": "Üdvözöljük a Szerva API-nál",
+  "A verification code has been sent to your phone": "Egy ellenőrző kódot küldtünk a telefonjára",
+  "No user found with this email or phone number already exists": "Ezzel az e-mail címmel vagy telefonszámmal már nem találtak felhasználót",
+  "Phone number is invalid": "A telefonszám érvénytelen"
 }

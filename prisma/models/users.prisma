@@ -15,7 +15,7 @@ model User {
     role             UserRole   @default(CUSTOMER)
     status           UserStatus @default(NEW)
 
-    dateOfBirth      DateTime?
+    dateOfBirth      String?
 
     addresses        Address[]
 

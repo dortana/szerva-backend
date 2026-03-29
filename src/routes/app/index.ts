@@ -10,6 +10,10 @@ import {
   updateUserInformation,
 } from "@/controllers/app/user-info";
 import { getExperts } from "@/controllers/app/experts";
+import {
+  sendPhoneVerificationHandler,
+  verifyPhoneHandler,
+} from "@/controllers/auth/verify";
 
 const router = Router();
 
@@ -28,6 +32,8 @@ router.use(
 );
 router.get("/me", getUserInformation);
 router.put("/me", updateUserInformation);
+router.post("/me/send-phone-verification", sendPhoneVerificationHandler);
+router.post("/me/verify-phone", verifyPhoneHandler);
 router.get("/logout", logoutHandler);
 
 export default router;
