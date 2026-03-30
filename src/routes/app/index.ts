@@ -11,6 +11,7 @@ import {
 } from "@/controllers/app/user-info";
 import { getExperts } from "@/controllers/app/experts";
 import {
+  resendVerificationPhoneHandler,
   sendPhoneVerificationHandler,
   verifyPhoneHandler,
 } from "@/controllers/auth/verify";
@@ -38,7 +39,7 @@ router.get("/me", getUserInformation);
 router.put("/me", updateUserInformation);
 router.post("/me/send-phone-verification", sendPhoneVerificationHandler);
 router.post("/me/verify-phone", verifyPhoneHandler);
-
+router.post("/me/resend-verification-phone", resendVerificationPhoneHandler);
 router.get("/me/search-address", searchAddressHandler);
 router.post("/me/add-address", newAddressHandler);
 

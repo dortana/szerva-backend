@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import prisma from "@/config/db";
-import { success, z } from "zod";
+import { z } from "zod";
 import {
   formatZodError,
   sendEmailWithTemplate,
@@ -241,6 +241,100 @@ export const sendPhoneVerificationHandler = async (
   }
 };
 
+export const resendVerificationPhoneHandler = async (
+  req: Request,
+  res: Response,
+) => {
+  const phoneSchema = z.object({
+    phone: z
+      .string(t("Phone number is invalid"))
+      .refine((value) => isValidPhoneNumber(value), {
+        message: t("Phone number is invalid"),
+      }),
+    email: z
+      .email({
+        message: t("Email address is invalid"),
+      })
+      .min(5, {
+        message: t("Email must be at least 5 characters long"),
+      }),
+  });
+  try {
+    const result = phoneSchema.safeParse(req.body);
+
+    if (!result.success) {
+      return res.status(400).json({
+        message: t("Invalid input"),
+        errors: formatZodError(result.error),
+      });
+    }
+
+    const { phone, email } = result.data;
+
+    const existingUser = await prisma.user.findFirst({
+      where: { email },
+    });
+
+    if (!existingUser) {
+      return res.status(404).json({
+        message: t("No user found with this email"),
+      });
+    }
+
+    const existingVerification = await prisma.verification.findFirst({
+      where: { phone },
+    });
+
+    if (existingVerification && existingVerification.expiresAt > new Date()) {
+      const remainingSeconds = Math.ceil(
+        (existingVerification.expiresAt.getTime() - Date.now()) / 1000,
+      );
+
+      return res.status(400).json({
+        message: t(
+          "Verification code is still valid. Please wait before requesting a new one.",
+        ),
+        remainingSeconds,
+      });
+    }
+
+    const code = generateCode();
+    console.log("OTP Code For Resend Code: ", code); // TODO: remove later
+    const codeHash = crypto.createHash("sha256").update(code).digest("hex");
+
+    await prisma.verification.upsert({
+      where: { phone },
+      update: {
+        codeHash,
+        expiresAt: new Date(Date.now() + 10 * 60 * 1000),
+        attempts: 0,
+      },
+      create: {
+        phone,
+        codeHash,
+        expiresAt: new Date(Date.now() + 10 * 60 * 1000),
+      },
+    });
+
+    await sendSMS({
+      to: phone,
+      text: `Your verification code is: ${code}`,
+    });
+
+    return res.status(200).json({
+      message: t("A verification code has been sent to your phone"),
+    });
+  } catch (error) {
+    logger.error("Resend failed", {
+      error,
+    });
+
+    return res.status(500).json({
+      message: t("Internal server error"),
+    });
+  }
+};
+
 export const forgotPasswordVerifyEmailHandler = async (
   req: Request,
   res: Response,
@@ -316,6 +410,7 @@ export const forgotPasswordVerifyEmailHandler = async (
     });
   }
 };
+
 export const resendVerificationEmailHandler = async (
   req: Request,
   res: Response,
@@ -348,6 +443,23 @@ export const resendVerificationEmailHandler = async (
     if (!existingUser) {
       return res.status(404).json({
         message: t("No user found with this email"),
+      });
+    }
+
+    const existingVerification = await prisma.verification.findFirst({
+      where: { email },
+    });
+
+    if (existingVerification && existingVerification.expiresAt > new Date()) {
+      const remainingSeconds = Math.ceil(
+        (existingVerification.expiresAt.getTime() - Date.now()) / 1000,
+      );
+
+      return res.status(400).json({
+        message: t(
+          "Verification code is still valid. Please wait before requesting a new one.",
+        ),
+        remainingSeconds,
       });
     }
 
