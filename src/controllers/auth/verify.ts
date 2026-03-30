@@ -17,6 +17,7 @@ import { ApiError } from "@/utils/api-error";
 import { generateCode } from "./signup";
 import VerifyEmailTemplate from "@/emails/VerifyEmailTemplate";
 import { isValidPhoneNumber } from "libphonenumber-js";
+import { OTP_EXPIRATION_MS } from "@/utils/app_data";
 
 const createVerifyEmailSchema = (t: (key: string) => string) =>
   z.object({
@@ -206,6 +207,20 @@ export const sendPhoneVerificationHandler = async (
       });
     }
 
+    const existingVerification = await prisma.verification.findFirst({
+      where: { phone },
+    });
+
+    if (existingVerification && existingVerification.expiresAt > new Date()) {
+      const remainingSeconds = Math.ceil(
+        (existingVerification.expiresAt.getTime() - Date.now()) / 1000,
+      );
+      return res.status(200).json({
+        message: t("A verification code has already been sent to your phone"),
+        remainingSeconds,
+      });
+    }
+
     await prisma.verification.deleteMany({
       where: { phone },
     });
@@ -218,7 +233,7 @@ export const sendPhoneVerificationHandler = async (
       data: {
         phone,
         codeHash,
-        expiresAt: new Date(Date.now() + 10 * 60 * 1000), // 10 min
+        expiresAt: new Date(Date.now() + OTP_EXPIRATION_MS),
       },
     });
 
@@ -290,7 +305,7 @@ export const resendVerificationPhoneHandler = async (
         (existingVerification.expiresAt.getTime() - Date.now()) / 1000,
       );
 
-      return res.status(400).json({
+      return res.status(200).json({
         message: t(
           "Verification code is still valid. Please wait before requesting a new one.",
         ),
@@ -306,13 +321,13 @@ export const resendVerificationPhoneHandler = async (
       where: { phone },
       update: {
         codeHash,
-        expiresAt: new Date(Date.now() + 10 * 60 * 1000),
+        expiresAt: new Date(Date.now() + OTP_EXPIRATION_MS),
         attempts: 0,
       },
       create: {
         phone,
         codeHash,
-        expiresAt: new Date(Date.now() + 10 * 60 * 1000),
+        expiresAt: new Date(Date.now() + OTP_EXPIRATION_MS),
       },
     });
 
@@ -455,7 +470,7 @@ export const resendVerificationEmailHandler = async (
         (existingVerification.expiresAt.getTime() - Date.now()) / 1000,
       );
 
-      return res.status(400).json({
+      return res.status(200).json({
         message: t(
           "Verification code is still valid. Please wait before requesting a new one.",
         ),
@@ -471,13 +486,13 @@ export const resendVerificationEmailHandler = async (
       where: { email },
       update: {
         codeHash,
-        expiresAt: new Date(Date.now() + 10 * 60 * 1000),
+        expiresAt: new Date(Date.now() + OTP_EXPIRATION_MS),
         attempts: 0,
       },
       create: {
         email,
         codeHash,
-        expiresAt: new Date(Date.now() + 10 * 60 * 1000),
+        expiresAt: new Date(Date.now() + OTP_EXPIRATION_MS),
       },
     });
 

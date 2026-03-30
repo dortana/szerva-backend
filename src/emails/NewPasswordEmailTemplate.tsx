@@ -1,3 +1,4 @@
+import { companyEmail } from "@/utils/app_data";
 import {
   Body,
   Container,
@@ -35,8 +36,8 @@ export const NewPasswordEmailTemplate = ({
         <Text style={paragraph}>Not expecting this email?</Text>
         <Text style={paragraph}>
           Contact{" "}
-          <Link href="mailto:support@szerva.com" style={link}>
-            support@szerva.com
+          <Link href={`mailto:${companyEmail}`} style={link}>
+            {companyEmail}
           </Link>{" "}
           if you did not request this code.
         </Text>
