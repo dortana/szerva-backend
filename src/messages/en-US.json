@@ -1,6 +1,7 @@
 {
   "A new verification code has been sent to your email, Please check your inbox.": "A new verification code has been sent to your email, Please check your inbox.",
   "A user with this email already exists": "A user with this email already exists",
+  "A verification code has already been sent to your phone": "A verification code has already been sent to your phone",
   "A verification code has been sent to your email, Please check your inbox.": "A verification code has been sent to your email, Please check your inbox.",
   "A verification code has been sent to your phone": "A verification code has been sent to your phone",
   "Address added successfully": "Address added successfully",
@@ -23,11 +24,15 @@
   "Invalid verification code": "Invalid verification code",
   "Last name is required": "Last name is required",
   "Lastname must be at least 2 characters long": "Lastname must be at least 2 characters long",
+  "Latitude is required": "Latitude is required",
+  "Latitude must be a number": "Latitude must be a number",
   "Location added successfully.": "Location added successfully.",
   "Location not found.": "Location not found.",
   "Location updated successfully.": "Location updated successfully.",
   "Location with this city already exists.": "Location with this city already exists.",
   "Logout successful.": "Logout successful.",
+  "Longitude is required": "Longitude is required",
+  "Longitude must be a number": "Longitude must be a number",
   "No user found": "No user found",
   "No user found with this email": "No user found with this email",
   "No user found with this email or phone number already exists": "No user found with this email or phone number already exists",
@@ -42,10 +47,9 @@
   "Search query must be at least 3 characters": "Search query must be at least 3 characters",
   "Unauthorized": "Unauthorized",
   "Verification code is required": "Verification code is required",
+  "Verification code is still valid. Please wait before requesting a new one.": "Verification code is still valid. Please wait before requesting a new one.",
   "Verification code must be 6 digits": "Verification code must be 6 digits",
   "Verification code must be numeric": "Verification code must be numeric",
   "Verification successful. You will recevice your new password within a few minutes by email.": "Verification successful. You will recevice your new password within a few minutes by email.",
-  "Welcome to the Szerva API": "Welcome to the Szerva API",
-  "Verification code is still valid. Please wait before requesting a new one.": "Verification code is still valid. Please wait before requesting a new one.",
-  "A verification code has already been sent to your phone": "A verification code has already been sent to your phone"
+  "Welcome to the Szerva API": "Welcome to the Szerva API"
 }
