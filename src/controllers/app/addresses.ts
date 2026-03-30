@@ -24,6 +24,13 @@ const addressSchema = z.object({
     state: z.string().optional(),
     postalCode: z.string().min(1, { message: t("Postal code is required") }),
 
+    latitude: z
+      .number(t("Latitude must be a number"))
+      .min(1, { message: t("Latitude is required") }),
+    longitude: z
+      .number(t("Longitude must be a number"))
+      .min(1, { message: t("Longitude is required") }),
+
     country: z.string().min(1, { message: t("Country is required") }),
     countryCode: z.string().min(1, { message: t("Country code is required") }),
 
@@ -82,6 +89,9 @@ export const newAddressHandler = async (req: Request, res: Response) => {
           city: address.city,
           state: address.state ?? null,
           postalCode: address.postalCode ?? null,
+
+          latitude: address.latitude,
+          longitude: address.longitude,
 
           country: address.country,
           countryCode: address.countryCode,

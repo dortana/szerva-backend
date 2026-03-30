@@ -15,10 +15,12 @@ declare global {
 export type AddressDTO = {
   id: string;
   addressLine1: string;
-  addressLine2?: string;
+  addressLine2?: string | undefined;
   city: string;
   state?: string;
   postalCode: string;
   country: string;
   countryCode: string;
+  latitude: number;
+  longitude: number;
 };

@@ -3,7 +3,7 @@ import { AddressDTO } from "@/types/app";
 type MapboxContextItem = {
   id: string;
   text: string;
-  short_code: string;
+  short_code?: string;
 };
 
 export type MapboxFeature = {
@@ -13,6 +13,7 @@ export type MapboxFeature = {
   place_type: string[];
   context?: MapboxContextItem[];
   address?: string;
+  center: [number, number]; // [longitude, latitude]
 };
 
 export const mapboxToAddress = (feature: MapboxFeature): AddressDTO => {
@@ -21,22 +22,34 @@ export const mapboxToAddress = (feature: MapboxFeature): AddressDTO => {
   const find = (type: string) => context.find((c) => c.id.startsWith(type));
 
   const country = find("country");
+  const region = find("region");
+  const district = find("district");
+  const place = find("place");
+  const neighborhood = find("neighborhood");
+  const postcode = find("postcode");
+  const locality = find("locality");
 
-  const district = find("neighborhood")?.text ?? find("district")?.text;
+  const [longitude, latitude] = feature.center;
 
   return {
     id: feature.id,
+
     addressLine1: feature.address
       ? `${feature.text} ${feature.address}`
       : feature.text,
 
-    addressLine2: district ?? "",
+    addressLine2: neighborhood?.text ?? district?.text ?? undefined,
 
-    city: find("place")?.text ?? "",
-    state: find("region")?.text ?? "",
-    postalCode: find("postcode")?.text ?? "",
+    city: place?.text ?? locality?.text ?? "",
+
+    state: region?.text ?? "",
+
+    postalCode: postcode?.text ?? "",
 
     country: country?.text ?? "",
     countryCode: country?.short_code?.toUpperCase() ?? "",
+
+    latitude,
+    longitude,
   };
 };
