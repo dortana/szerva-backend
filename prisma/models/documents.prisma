@@ -21,7 +21,9 @@ model Document {
 }
 
 enum DocumentType {
-  ID_CARD
+  ID_CARD_FRONT
+  ID_CARD_BACK
+  SELFIE
   DRIVER_LICENSE
   PASSPORT
   UTILITY_BILL
