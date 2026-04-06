@@ -11,6 +11,7 @@ import logger from "@/utils/logger";
 import { generateCode } from "./signup";
 import { t } from "@/utils/i18nContext";
 import { UserRole } from "@/generated/prisma/enums";
+import { OTP_EXPIRATION_MS } from "@/utils/app_data";
 
 export const loginHandler = async (req: Request, res: Response) => {
   const loginSchema = z.object({
@@ -111,7 +112,7 @@ export const loginHandler = async (req: Request, res: Response) => {
       data: {
         email,
         codeHash,
-        expiresAt: new Date(Date.now() + 10 * 60 * 1000), // 10 min
+        expiresAt: new Date(Date.now() + OTP_EXPIRATION_MS),
       },
     });
 

@@ -9,3 +9,4 @@ export const socialLinks = {
   youtube: "https://www.youtube.com/@szerva",
   linkedin: "https://www.linkedin.com/company/szerva",
 };
+export const OTP_EXPIRATION_MS = 2 * 60 * 1000; // 2 minutes

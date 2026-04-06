@@ -5,6 +5,7 @@ import { formatZodError } from "@/utils/functions";
 import crypto from "crypto";
 import { t } from "@/utils/i18nContext";
 import logger from "@/utils/logger";
+import { OTP_EXPIRATION_MS } from "@/utils/app_data";
 
 export const forgotPasswordHandler = async (req: Request, res: Response) => {
   const forgotPasswordSchema = z.object({
@@ -50,7 +51,7 @@ export const forgotPasswordHandler = async (req: Request, res: Response) => {
       data: {
         email,
         codeHash,
-        expiresAt: new Date(Date.now() + 10 * 60 * 1000), // 10 min
+        expiresAt: new Date(Date.now() + OTP_EXPIRATION_MS),
       },
     });
 

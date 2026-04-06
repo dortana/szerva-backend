@@ -1,0 +1,30 @@
+model Expertise {
+  id          String @id @default(uuid())
+
+  userId      String
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title       String?   // e.g. "Senior Backend Engineer"
+  bio         String?   // short description
+  experience  Int?      // years of experience
+
+  hourlyRate  Float?    // optional if marketplace
+  currency    Currency?   
+
+  linkedinUrl String?
+  websiteUrl  String?
+  githubUrl   String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("expertises")
+}
+
+enum Currency {
+  USD
+  EUR
+  GBP
+  CHF
+  HUF
+}

@@ -1,8 +1,8 @@
 model Verification {
-    id String @id @default(uuid())
+    id        String @id @default(uuid())
 
-    email String? @unique
-    phone String? @unique
+    email     String? @unique
+    phone     String? @unique
 
     codeHash  String
     expiresAt DateTime

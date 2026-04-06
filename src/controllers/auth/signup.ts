@@ -8,6 +8,7 @@ import { VerifyEmailTemplate } from "@/emails/VerifyEmailTemplate";
 import logger from "@/utils/logger";
 import { UserRole } from "@/generated/prisma/enums";
 import { t } from "@/utils/i18nContext";
+import { OTP_EXPIRATION_MS } from "@/utils/app_data";
 
 export const signUpHandler = async (req: Request, res: Response) => {
   const signUpSchema = z.object({
@@ -91,7 +92,7 @@ export const signUpHandler = async (req: Request, res: Response) => {
       data: {
         email,
         codeHash,
-        expiresAt: new Date(Date.now() + 10 * 60 * 1000), // 10 min
+        expiresAt: new Date(Date.now() + OTP_EXPIRATION_MS),
       },
     });
 

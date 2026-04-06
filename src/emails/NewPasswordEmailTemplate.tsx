@@ -1,3 +1,4 @@
+import { companyEmail } from "@/utils/app_data";
 import {
   Body,
   Container,
@@ -23,11 +24,7 @@ export const NewPasswordEmailTemplate = ({
     <Head />
     <Body style={main}>
       <Container style={container}>
-        <Img
-          src={`https://serveportal.vercel.app/app_logo.png`}
-          alt="Logo"
-          style={logo}
-        />
+        <Img src={`https://szerva.com/app_logo.png`} alt="Logo" style={logo} />
         <Text style={tertiary}>New Password</Text>
         <Heading style={secondary}>
           Dear {firstName}, This is your new password. Please don{"'"}t share
@@ -39,8 +36,8 @@ export const NewPasswordEmailTemplate = ({
         <Text style={paragraph}>Not expecting this email?</Text>
         <Text style={paragraph}>
           Contact{" "}
-          <Link href="mailto:support@szerva.com" style={link}>
-            support@szerva.com
+          <Link href={`mailto:${companyEmail}`} style={link}>
+            {companyEmail}
           </Link>{" "}
           if you did not request this code.
         </Text>
