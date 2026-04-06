@@ -24,7 +24,7 @@
     "translations:check": "i18next --fail-on-update && pnpm run translations:sort && pnpm run translations:format",
     "i18n:sync": "ts-node --esm scripts/translate.ts && pnpm run translations:format",
     "translate": "pnpm run translations:extract && pnpm run i18n:sync",
-    "contentful:export": "contentful space export --space-id $CONTENTFUL_SPACE_ID --environment-id develop --content-file develop-export.json",
+    "contentful:export": "contentful space export --space-id 3kbnoh6nxy1s --environment-id master --content-file services-data.json",
     "contentful:import": "contentful space import --space-id $CONTENTFUL_SPACE_ID --environment-id master --content-file develop-export.json",
     "contentful:publish": "contentful space publish --space-id $CONTENTFUL_SPACE_ID --environment-id master",
     "contentful:migrate": "npm run contentful:export && npm run contentful:import && npm run contentful:publish && rm -f develop-export.json",
