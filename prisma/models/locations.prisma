@@ -11,6 +11,8 @@ model Location {
 
   services  Json[]
 
+  users     User[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
