@@ -1,4 +1,4 @@
-import { getCustomers,setLocationHandler } from "@/controllers/customers";
+import { getCustomers, setLocationHandler } from "@/controllers/customers";
 import { UserRole } from "@/generated/prisma/enums";
 import requiresAuth from "@/middlewares/auth";
 import { Router } from "express";

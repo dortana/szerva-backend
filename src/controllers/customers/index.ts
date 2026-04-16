@@ -14,7 +14,8 @@ export const setLocationHandler = async (req: Request, res: Response) => {
   const userId = req.user?.userId!;
   const schema = z.object({
     locationId: z
-      .string().min(1, "Location ID is required")
+      .string()
+      .min(1, "Location ID is required")
       .uuid("Invalid location id"),
   });
 
@@ -51,7 +52,6 @@ export const setLocationHandler = async (req: Request, res: Response) => {
       location: existingLocation,
       message: t("Location set successfully"),
     });
-
   } catch (error) {
     logger.error("Update user info failed", {
       error,
