@@ -1,46 +1,50 @@
 model User {
-    id               String @id @default(uuid())
+    id String @id @default(uuid())
 
-    firstName        String
-    lastName         String
+    firstName String
+    lastName  String
 
-    email            String    @unique
-    emailVerified    DateTime?
-    phone            String?   @unique
-    phoneVerified    DateTime?
+    email         String    @unique
+    emailVerified DateTime?
+    phone         String?   @unique
+    phoneVerified DateTime?
 
-    passwordHash     String
+    passwordHash String
 
-    image            String?
-    role             UserRole   @default(CUSTOMER)
-    status           UserStatus @default(NEW)
+    image  String?
+    role   UserRole   @default(CUSTOMER)
+    status UserStatus @default(NEW)
 
-    dateOfBirth      String?
+    dateOfBirth String?
 
-    addresses        Address[]
+    addresses Address[]
 
-    verified         Boolean @default(false)
+    verified Boolean @default(false)
 
     twoFactorEnabled Boolean @default(false)
 
     onBoardingStatus OnBoardingStatus? @default(NOT_STARTED)
     expertiseDetails Expertise[]
 
-    documents        Document[]
+    documents Document[]
 
-    createdAt        DateTime @default(now())
-    updatedAt        DateTime @default(now()) @updatedAt
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now()) @updatedAt
 
-    sessions         Session[]
+    sessions Session[]
 
-    userOrders       Order[] @relation("OrderUser")
-    expertOrders     Order[] @relation("OrderExpert")
+    userOrders   Order[] @relation("OrderUser")
+    expertOrders Order[] @relation("OrderExpert")
 
-    reviewsGiven     Review[] @relation("ReviewAuthor")
-    reviewsReceived  Review[] @relation("ReviewTarget")
+    reviewsGiven    Review[] @relation("ReviewAuthor")
+    reviewsReceived Review[] @relation("ReviewTarget")
+
+    selectedLocation   Location? @relation(fields: [selectedLocationId], references: [id])
+    selectedLocationId String?
+
+    selectedLanguage Language? @default(EN_US)
 
     @@map("users")
-  
 }
 
 enum UserRole {
@@ -68,4 +72,9 @@ enum OnBoardingStatus {
     DOCUMENTS_UPLOAD
     UNDER_REVIEW
     COMPLETED
+}
+
+enum Language {
+    EN_US
+    HU_HU
 }

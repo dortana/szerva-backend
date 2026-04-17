@@ -13,8 +13,32 @@ export const onboardingAddPersonalInfo = async (
 ) => {
   const userId = req.user?.userId!;
 
+  const schema = z.object({
+    firstName: z.string(t("First name is required")).min(2, {
+      message: t("Firstname must be at least 2 characters long"),
+    }),
+    lastName: z.string(t("Last name is required")).min(2, {
+      message: t("Lastname must be at least 2 characters long"),
+    }),
+    dateOfBirth: z
+      .string(t("Date of birth is required"))
+      .min(1, { message: t("Date of birth is required") })
+      .refine((val) => !isNaN(Date.parse(val)), {
+        message: t("Invalid date"),
+      }),
+  });
+
   try {
-    const { firstName, lastName, dateOfBirth } = req.body;
+    const result = schema.safeParse(req.body);
+
+    if (!result.success) {
+      return res.status(400).json({
+        message: t("Invalid input"),
+        errors: formatZodError(result.error),
+      });
+    }
+
+    const { firstName, lastName, dateOfBirth } = result.data;
     const existingUser = await prisma.user.findUnique({
       where: { id: userId },
     });
