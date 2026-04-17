@@ -10,7 +10,12 @@ import { createToken, tokenMaxAge } from "@/utils/jwt";
 import crypto from "crypto";
 import { t } from "@/utils/i18nContext";
 import bcrypt from "bcrypt";
-import { OnBoardingStatus, User, UserRole } from "@/generated/prisma/client";
+import {
+  Language,
+  OnBoardingStatus,
+  User,
+  UserRole,
+} from "@/generated/prisma/client";
 import { NewPasswordEmailTemplate } from "@/emails/NewPasswordEmailTemplate";
 import logger from "@/utils/logger";
 import { ApiError } from "@/utils/api-error";
@@ -604,7 +609,15 @@ export const sanitizeUser = (user: User) => {
     role: user.role,
     emailVerified: user.emailVerified,
     onBoardingStatus: user.onBoardingStatus,
+    selectedLanguage: user?.selectedLanguage
+      ? normalizeLanguage(user?.selectedLanguage)
+      : null,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
   };
+};
+
+const normalizeLanguage = (language: Language) => {
+  const [lang, region] = language.split("-");
+  return `${lang?.toLowerCase()}_${region?.toUpperCase()}`;
 };

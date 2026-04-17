@@ -1,4 +1,4 @@
-import { getCustomers, setLocationHandler } from "@/controllers/customers";
+import { getCustomers } from "@/controllers/customers";
 import { UserRole } from "@/generated/prisma/enums";
 import requiresAuth from "@/middlewares/auth";
 import { Router } from "express";
@@ -9,7 +9,5 @@ const router = Router();
 router.use(requiresAuth(UserRole.CUSTOMER));
 
 router.get("/test", getCustomers);
-
-router.put("/set-location", setLocationHandler);
 
 export default router;
