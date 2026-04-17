@@ -66,7 +66,6 @@ export interface IServiceFields {
   description: EntryFieldTypes.Text;
   slug: EntryFieldTypes.Symbol;
   jobTitle: EntryFieldTypes.Text;
-  icon: EntryFieldTypes.AssetLink;
   banner: EntryFieldTypes.AssetLink;
   agreementFile?: EntryFieldTypes.AssetLink;
   isAgreementNeeded?: EntryFieldTypes.Boolean;
