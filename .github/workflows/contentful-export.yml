@@ -18,9 +18,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Debug workflow version
-        run: echo "NEW WORKFLOW VERSION RUNNING"
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -28,11 +25,6 @@ jobs:
 
       - name: Install pnpm
         run: npm install -g pnpm@10.24.0
-
-      - name: Verify pnpm
-        run: |
-          which pnpm
-          pnpm -v
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -42,39 +34,18 @@ jobs:
         env:
           CONTENTFUL_MANAGEMENT_TOKEN: ${{ secrets.CONTENTFUL_MANAGEMENT_TOKEN }}
 
-      # ---- COMMIT TO MAIN ----
-      - name: Commit to main
-        id: commit_main
+      - name: Commit changes
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
-          git add services-data.json
-
-          if git diff --cached --quiet; then
-            echo "No changes"
-            echo "changed=false" >> $GITHUB_OUTPUT
-          else
-            git commit -m "Update Contentful export"
-            git push origin HEAD:main
-            echo "changed=true" >> $GITHUB_OUTPUT
-          fi
-
-      # ---- SYNC TO DEVELOP ----
-      - name: Sync to develop
-        if: steps.commit_main.outputs.changed == 'true'
-        run: |
-          git fetch origin
-          git checkout develop
-          git pull origin develop
-
-          git checkout main -- services-data.json
+          BRANCH="${GITHUB_REF_NAME}"
 
           git add services-data.json
 
           if git diff --cached --quiet; then
-            echo "No changes for develop"
+            echo "No changes to commit"
           else
             git commit -m "Update Contentful export"
-            git push origin HEAD:develop
+            git push origin HEAD:$BRANCH
           fi

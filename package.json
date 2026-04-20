@@ -24,7 +24,7 @@
     "translations:check": "i18next --fail-on-update && pnpm run translations:sort && pnpm run translations:format",
     "i18n:sync": "ts-node --esm scripts/translate.ts && pnpm run translations:format",
     "translate": "pnpm run translations:extract && pnpm run i18n:sync",
-    "contentful:export": "contentful space export --space-id 3kbnoh6nxy1s --environment-id master --content-file services-data.json"
+    "contentful:export": "contentful space export --space-id 3kbnoh6nxy1s --environment-id master --content-file services-data.json --management-token $CONTENTFUL_MANAGEMENT_TOKEN"
   },
   "keywords": [],
   "author": "Dortana",
