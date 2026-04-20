@@ -2,7 +2,15 @@ import path from "node:path";
 import fs from "node:fs/promises";
 import { ServiceCarouselDto, ServiceDto } from "./types";
 
-const getLocaleValue = (field: any, locale: string) => field?.[locale];
+const DEFAULT_LOCALE = "en-US";
+
+const getLocaleValue = (field: any, locale: string) => {
+  if (!field) return undefined;
+
+  // 1. Try the requested locale (e.g., hu-HU)
+  // 2. If it's missing, fall back to the default (e.g., en-US)
+  return field[locale] !== undefined ? field[locale] : field[DEFAULT_LOCALE];
+};
 
 const resolveAssetUrl = (
   assetLink: any,
