@@ -1,0 +1,42 @@
+name: Contentful Export
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # every day at 2 AM
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Contentful export
+        run: pnpm contentful:export
+        env:
+          CONTENTFUL_MANAGEMENT_TOKEN: ${{ secrets.CONTENTFUL_MANAGEMENT_TOKEN }}
+
+      - name: Commit updated JSON
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add services-data.json
+          git commit -m "Update Contentful export" || echo "No changes"
+          git push
