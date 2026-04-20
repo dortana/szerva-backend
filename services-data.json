@@ -36621,6 +36621,114 @@
           }
         }
       }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "3kbnoh6nxy1s"
+          }
+        },
+        "id": "jrKDWMNf2zPEVnsoyscdS",
+        "type": "Entry",
+        "createdAt": "2026-04-20T16:30:18.558Z",
+        "updatedAt": "2026-04-20T16:31:00.940Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 7,
+        "publishedAt": "2026-04-20T16:31:00.940Z",
+        "firstPublishedAt": "2026-04-20T16:31:00.940Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "7c2eE61lnHs7TvHUDivWfy"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "7c2eE61lnHs7TvHUDivWfy"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 8,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "7c2eE61lnHs7TvHUDivWfy"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published",
+            "hu-HU": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "serviceCarousel"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/3kbnoh6nxy1s/environments/master/entries/jrKDWMNf2zPEVnsoyscdS"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Test Service Carousel By Milad",
+          "hu-HU": "Test Service Carousel By Milad HUN"
+        },
+        "services": {
+          "en-US": [
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "1RPnuj8a4hxMtDuhBZKUHk"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "7J3bK3npiEt5XwJvSR4QQi"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "3i7tmwPdcYB795uQ7Nw5Y9"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Entry",
+                "id": "1RPnuj8a4hxMtDuhBZKUHk"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "assets": [
