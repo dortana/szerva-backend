@@ -14,6 +14,7 @@ export const getServices = async (req: Request, res: Response) => {
   const baseSlug = req.query.baseSlug as string | undefined;
 
   try {
+    //@ts-ignore
     const allServices: ServiceDto[] = await getEntriesByType(
       "service",
       locale,
