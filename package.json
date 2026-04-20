@@ -24,11 +24,7 @@
     "translations:check": "i18next --fail-on-update && pnpm run translations:sort && pnpm run translations:format",
     "i18n:sync": "ts-node --esm scripts/translate.ts && pnpm run translations:format",
     "translate": "pnpm run translations:extract && pnpm run i18n:sync",
-    "contentful:export": "contentful space export --space-id 3kbnoh6nxy1s --environment-id master --content-file services-data.json",
-    "contentful:import": "contentful space import --space-id $CONTENTFUL_SPACE_ID --environment-id master --content-file develop-export.json",
-    "contentful:publish": "contentful space publish --space-id $CONTENTFUL_SPACE_ID --environment-id master",
-    "contentful:migrate": "npm run contentful:export && npm run contentful:import && npm run contentful:publish && rm -f develop-export.json",
-    "contentful:diff": "contentful space diff --space-id $CONTENTFUL_SPACE_ID --source develop --target master"
+    "contentful:export": "contentful space export --space-id 3kbnoh6nxy1s --environment-id master --content-file services-data.json"
   },
   "keywords": [],
   "author": "Dortana",
@@ -66,6 +62,7 @@
     "@types/node": "^25.1.0",
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.1",
+    "contentful-cli": "^3.10.4",
     "eslint": "9.39.1",
     "i18next-parser": "9.3.0",
     "nodemon": "3.1.11",
