@@ -3,7 +3,7 @@ name: Contentful Export
 on:
   schedule:
     - cron: "0 0 * * *" # every day at 2 AM
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   export:
