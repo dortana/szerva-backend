@@ -20,6 +20,9 @@ const mapCategorySummary = (
   assetsMap: Map<string, any>,
   locale: string,
 ) => {
+  if (!catEntry || !catEntry.fields) {
+    return undefined;
+  }
   const v = (field: any) => getLocaleValue(field, locale);
   const iconUrl = resolveAssetUrl(v(catEntry.fields.icon), assetsMap, locale);
 
