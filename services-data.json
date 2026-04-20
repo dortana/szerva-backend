@@ -35629,10 +35629,8 @@
     },
     {
       "metadata": {
-        "tags": [
-        ],
-        "concepts": [
-        ]
+        "tags": [],
+        "concepts": []
       },
       "sys": {
         "space": {
@@ -35685,8 +35683,7 @@
             "hu-HU": "published"
           }
         },
-        "automationTags": [
-        ],
+        "automationTags": [],
         "contentType": {
           "sys": {
             "type": "Link",
