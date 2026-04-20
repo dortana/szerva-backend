@@ -2,7 +2,7 @@ name: Contentful Export
 
 on:
   schedule:
-    - cron: "0 0 * * *" # every day at 2 AM
+    - cron: "0 0 * * *" # runs daily (UTC)
   workflow_dispatch:
 
 jobs:
@@ -11,11 +11,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # needed for branch switching
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
+          cache: "pnpm"
 
       - name: Enable Corepack
         run: corepack enable
@@ -33,10 +36,34 @@ jobs:
         env:
           CONTENTFUL_MANAGEMENT_TOKEN: ${{ secrets.CONTENTFUL_MANAGEMENT_TOKEN }}
 
-      - name: Commit updated JSON
+      - name: Commit to main
+        id: commit_main
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
+
           git add services-data.json
-          git commit -m "Update Contentful export" || echo "No changes"
-          git push
+
+          # Check if there are changes
+          if git diff --cached --quiet; then
+            echo "No changes"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "Update Contentful export"
+            git push origin main
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Sync to develop
+        if: steps.commit_main.outputs.changed == 'true'
+        run: |
+          git fetch origin
+          git checkout develop
+          git pull origin develop
+
+          # bring updated file from main
+          git checkout main -- services-data.json
+
+          git add services-data.json
+          git commit -m "Update Contentful export"
+          git push origin develop
