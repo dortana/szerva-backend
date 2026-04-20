@@ -1,6 +1,6 @@
 import { getCategories } from "@/controllers/app/categories";
 import { getLocations } from "@/controllers/app/locations";
-import { getServices } from "@/controllers/app/services";
+import { getServices, getServiceCarousel } from "@/controllers/app/services";
 import { logoutHandler } from "@/controllers/app/logout";
 import { UserRole } from "@/generated/prisma/enums";
 import requiresAuth from "@/middlewares/auth";
@@ -25,6 +25,7 @@ const router = Router();
 
 router.get("/categories", getCategories);
 router.get("/services", getServices);
+router.get("/service-carousel", getServiceCarousel);
 router.get("/locations", getLocations);
 router.get("/experts", getExperts);
 
