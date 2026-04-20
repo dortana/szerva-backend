@@ -3,9 +3,10 @@ import type { Request, Response } from "express";
 import logger from "@/utils/logger";
 import {
   getEntriesByType,
+  mapServiceCarousel,
   mapSingleService,
 } from "@/config/contentful/mappers";
-import { ServiceDto } from "@/config/contentful/types";
+import { ServiceCarouselDto, ServiceDto } from "@/config/contentful/types";
 
 export const getServices = async (req: Request, res: Response) => {
   const locale = getCurrentLanguage();
@@ -39,6 +40,22 @@ export const getServices = async (req: Request, res: Response) => {
     return res.status(200).json({ services: filteredServices });
   } catch (error) {
     logger.error("Failed to resolve services", { error });
+    return res.status(500).json({ message: t("Internal server error") });
+  }
+};
+
+export const getServiceCarousel = async (req: Request, res: Response) => {
+  const locale = getCurrentLanguage();
+  try {
+    const carousels = await getEntriesByType<ServiceCarouselDto>(
+      "serviceCarousel",
+      locale,
+      mapServiceCarousel,
+    );
+
+    return res.status(200).json({ carousels });
+  } catch (error) {
+    logger.error("Failed to resolve service carousels", { error });
     return res.status(500).json({ message: t("Internal server error") });
   }
 };

@@ -59,3 +59,9 @@ export type ServiceDto = {
 
   questions: QuestionDto[];
 };
+
+export type ServiceCarouselDto = {
+  id: string;
+  title: string;
+  services: ServiceDto[];
+};

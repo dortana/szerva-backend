@@ -1,5 +1,6 @@
 import path from "node:path";
 import fs from "node:fs/promises";
+import { ServiceCarouselDto, ServiceDto } from "./types";
 
 const getLocaleValue = (field: any, locale: string) => field?.[locale];
 
@@ -155,4 +156,32 @@ export const getEntriesByType = async <T>(
     console.error(`Error resolving content type: ${contentType}`, error);
     throw new Error("Failed to process local data file.");
   }
+};
+
+export const mapServiceCarousel = (
+  entry: any,
+  entriesMap: Map<string, any>,
+  assetsMap: Map<string, any>,
+  locale: string,
+): ServiceCarouselDto => {
+  const v = (field: any) => getLocaleValue(field, locale);
+
+  const serviceLinks = v(entry.fields.services) ?? [];
+
+  return {
+    id: entry.sys.id,
+    title: v(entry.fields.title),
+    services: serviceLinks
+      .map((link: any) => entriesMap.get(link.sys.id))
+      .filter(Boolean)
+      .map((s: any) => {
+        const fullService = mapSingleService(s, entriesMap, assetsMap, locale);
+
+        // Remove questions, mainCategory, and baseCategory
+        const { questions, mainCategory, baseCategory, ...leanService } =
+          fullService;
+
+        return leanService as ServiceDto;
+      }),
+  };
 };
