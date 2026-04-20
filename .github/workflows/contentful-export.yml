@@ -1,12 +1,14 @@
 name: Contentful Export
 
 on:
-  schedule:
-    - cron: "0 0 * * *" # runs daily (UTC)
   workflow_dispatch:
 
 permissions:
   contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   export:
     runs-on: ubuntu-latest
@@ -14,18 +16,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # needed for branch switching
+          fetch-depth: 0
+
+      - name: Debug workflow version
+        run: echo "NEW WORKFLOW VERSION RUNNING"
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
-          cache: "pnpm"
+          node-version: 22
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
+      - name: Install pnpm
+        run: npm install -g pnpm@10.24.0
+
+      - name: Verify pnpm
+        run: |
+          which pnpm
+          pnpm -v
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -35,6 +42,7 @@ jobs:
         env:
           CONTENTFUL_MANAGEMENT_TOKEN: ${{ secrets.CONTENTFUL_MANAGEMENT_TOKEN }}
 
+      # ---- COMMIT TO MAIN ----
       - name: Commit to main
         id: commit_main
         run: |
@@ -43,16 +51,16 @@ jobs:
 
           git add services-data.json
 
-          # Check if there are changes
           if git diff --cached --quiet; then
             echo "No changes"
             echo "changed=false" >> $GITHUB_OUTPUT
           else
             git commit -m "Update Contentful export"
-            git push origin main
+            git push origin HEAD:main
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
+      # ---- SYNC TO DEVELOP ----
       - name: Sync to develop
         if: steps.commit_main.outputs.changed == 'true'
         run: |
@@ -68,5 +76,5 @@ jobs:
             echo "No changes for develop"
           else
             git commit -m "Update Contentful export"
-            git push origin develop
+            git push origin HEAD:develop
           fi
