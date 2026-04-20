@@ -1,117 +1,158 @@
-import { Asset, Entry, UnresolvedLink } from "contentful";
-import {
-  CategorySkeleton,
-  OptionSkeleton,
-  QuestionSkeleton,
-  ServiceSkeleton,
-  isResolvedEntry,
-} from "./types";
+import path from "node:path";
+import fs from "node:fs/promises";
 
-/* ------------------ helpers ------------------ */
+const getLocaleValue = (field: any, locale: string) => field?.[locale];
 
-const assetToUrl = (
-  asset: Asset | UnresolvedLink<"Asset"> | undefined,
-): string | undefined => {
-  if (!asset || !("fields" in asset)) return undefined;
-  return asset.fields.file?.url ? `https:${asset.fields.file.url}` : undefined;
+const resolveAssetUrl = (
+  assetLink: any,
+  assetsMap: Map<string, any>,
+  locale: string,
+) => {
+  if (!assetLink?.sys?.id) return undefined;
+  const resAsset = assetsMap.get(assetLink.sys.id);
+  const file = getLocaleValue(resAsset?.fields?.file, locale);
+  return file?.url ? `https:${file.url}` : undefined;
 };
 
-/* ------------------ mappers ------------------ */
-
-export const mapCategory = (
-  entry: Entry<CategorySkeleton, undefined, string>,
+const mapCategorySummary = (
+  catEntry: any,
+  assetsMap: Map<string, any>,
+  locale: string,
 ) => {
-  const parent = isResolvedEntry(entry.fields.parentCategory)
-    ? entry.fields.parentCategory
-    : undefined;
+  const v = (field: any) => getLocaleValue(field, locale);
+  const iconUrl = resolveAssetUrl(v(catEntry.fields.icon), assetsMap, locale);
 
   return {
-    id: entry.sys.id,
-    title: entry.fields.title,
-    slug: entry.fields.slug,
-    iconUrl: assetToUrl(entry.fields.icon),
-    isActive: entry.fields.isActive,
-    //@ts-ignore
-    parentCategory: parent
-      ? {
-          id: parent.sys.id,
-          title: parent.fields.title,
-          slug: parent.fields.slug,
-          iconUrl: assetToUrl(parent.fields.icon),
-          isActive: parent.fields.isActive,
-        }
-      : undefined,
+    id: catEntry.sys.id,
+    title: v(catEntry.fields.title),
+    slug: v(catEntry.fields.slug),
+    ...(iconUrl !== undefined ? { iconUrl } : {}),
+    isActive: v(catEntry.fields.isActive) ?? false,
   };
 };
 
-const mapOption = (entry: Entry<OptionSkeleton, undefined, string>) => ({
-  id: entry.sys.id,
-  title: entry.fields.title,
-  value: entry.fields.value,
-  isDefaultAnswer: entry.fields.isDefaultAnswer,
-});
-
-const mapQuestion = (entry: Entry<QuestionSkeleton, undefined, string>) => ({
-  id: entry.sys.id,
-  title: entry.fields.title,
-  description: entry.fields.description,
-  questionType: entry.fields.questionType,
-  isMandatory: entry.fields.isMandatory,
-  minAnswers: entry.fields.minAnswers,
-  maxAnswers: entry.fields.maxAnswers,
-  options: (entry.fields.options ?? []).filter(isResolvedEntry).map(mapOption),
-  requiredParentOptionIds: (entry.fields.requiredParentOption ?? [])
-    .filter(isResolvedEntry)
-    //@ts-ignore
-    .map((o) => o.sys.id),
-});
-
-export const mapServiceBulk = (
-  entry: Entry<ServiceSkeleton, undefined, string>,
-) => {
-  if (
-    !isResolvedEntry(entry.fields.mainCategory) ||
-    !isResolvedEntry(entry.fields.baseCategory)
-  ) {
-    throw new Error("Service entry has unresolved categories");
-  }
+export const mapOption = (entry: any, locale: string) => {
+  const v = (field: any) => getLocaleValue(field, locale);
   return {
     id: entry.sys.id,
-    title: entry.fields.title,
-    description: entry.fields.description,
-    slug: entry.fields.slug,
-    jobTitle: entry.fields.jobTitle,
-    bannerUrl: assetToUrl(entry.fields.banner),
-    isAgreementNeeded: entry.fields.isAgreementNeeded,
-    isActive: entry.fields.isActive,
-    mainCategory: { slug: entry.fields.mainCategory.fields.slug },
-    baseCategory: { slug: entry.fields.baseCategory.fields.slug },
+    title: v(entry.fields.title),
+    value: v(entry.fields.value),
+    isDefaultAnswer: v(entry.fields.isDefaultAnswer) ?? false,
+  };
+};
+
+export const mapQuestion = (
+  entry: any,
+  entriesMap: Map<string, any>,
+  locale: string,
+) => {
+  const v = (field: any) => getLocaleValue(field, locale);
+
+  const optionLinks = v(entry.fields.options) ?? [];
+  const parentOptionLinks = v(entry.fields.requiredParentOption) ?? [];
+
+  return {
+    id: entry.sys.id,
+    title: v(entry.fields.title),
+    description: v(entry.fields.description),
+    questionType: v(entry.fields.questionType),
+    isMandatory: v(entry.fields.isMandatory) ?? false,
+    minAnswers: v(entry.fields.minAnswers),
+    maxAnswers: v(entry.fields.maxAnswers),
+    options: optionLinks
+      .map((link: any) => entriesMap.get(link.sys.id))
+      .filter(Boolean)
+      .map((opt: any) => mapOption(opt, locale)),
+    requiredParentOptionIds: parentOptionLinks.map((link: any) => link.sys.id),
+  };
+};
+
+export const mapCategory = (
+  entry: any,
+  entriesMap: Map<string, any>,
+  assetsMap: Map<string, any>,
+  locale: string,
+): any => {
+  const v = (field: any) => getLocaleValue(field, locale);
+
+  const rawParent = entriesMap.get(v(entry.fields.parentCategory)?.sys.id);
+  const iconUrl = resolveAssetUrl(v(entry.fields.icon), assetsMap, locale);
+  const parentCategory = mapCategorySummary(rawParent, assetsMap, locale);
+
+  return {
+    id: entry.sys.id,
+    title: v(entry.fields.title),
+    slug: v(entry.fields.slug),
+    ...(iconUrl !== undefined ? { iconUrl } : {}),
+    isActive: v(entry.fields.isActive) ?? false,
+    ...(parentCategory !== undefined ? { parentCategory } : {}),
   };
 };
 
 export const mapSingleService = (
-  entry: Entry<ServiceSkeleton, undefined, string>,
+  entry: any,
+  entriesMap: Map<string, any>,
+  assetsMap: Map<string, any>,
+  locale: string,
 ) => {
-  if (
-    !isResolvedEntry(entry.fields.mainCategory) ||
-    !isResolvedEntry(entry.fields.baseCategory)
-  ) {
-    throw new Error("Service entry has unresolved categories");
-  }
+  const v = (field: any) => getLocaleValue(field, locale);
+
+  const mainCatRaw = entriesMap.get(v(entry.fields.mainCategory)?.sys.id);
+  const baseCatRaw = entriesMap.get(v(entry.fields.baseCategory)?.sys.id);
+  const bannerUrl = resolveAssetUrl(v(entry.fields.banner), assetsMap, locale);
+  const mainCategory = mapCategorySummary(mainCatRaw, assetsMap, locale);
+  const baseCategory = mapCategorySummary(baseCatRaw, assetsMap, locale);
 
   return {
     id: entry.sys.id,
-    title: entry.fields.title,
-    description: entry.fields.description,
-    slug: entry.fields.slug,
-    jobTitle: entry.fields.jobTitle,
-    bannerUrl: assetToUrl(entry.fields.banner),
-    isAgreementNeeded: entry.fields.isAgreementNeeded,
-    isActive: entry.fields.isActive,
-    mainCategory: mapCategory(entry.fields.mainCategory),
-    baseCategory: mapCategory(entry.fields.baseCategory),
-    questions: (entry.fields.questions ?? [])
-      .filter(isResolvedEntry)
-      .map(mapQuestion),
+    title: v(entry.fields.title),
+    description: v(entry.fields.description),
+    slug: v(entry.fields.slug),
+    ...(bannerUrl !== undefined ? { bannerUrl } : {}),
+    isAgreementNeeded: v(entry.fields.isAgreementNeeded) ?? false,
+    isActive: v(entry.fields.isActive) ?? false,
+    mainCategory,
+    baseCategory,
+    questions: (v(entry.fields.questions) ?? [])
+      .map((link: any) => entriesMap.get(link.sys.id))
+      .filter(Boolean)
+      .map((q: any) => mapQuestion(q, entriesMap, locale)),
   };
+};
+
+export const getEntriesByType = async <T>(
+  contentType: string,
+  locale: string,
+  mapper: (
+    entry: any,
+    entriesMap: Map<string, any>,
+    assetsMap: Map<string, any>,
+    locale: string,
+  ) => T,
+): Promise<T[]> => {
+  try {
+    const rawData = await fs.readFile(
+      path.join(process.cwd(), "services-data.json"),
+      "utf8",
+    );
+    const json = JSON.parse(rawData);
+
+    const entriesMap = new Map<string, any>(
+      json.entries.map((e: any) => [e.sys.id, e]),
+    );
+    const assetsMap = new Map<string, any>(
+      json.assets.map((a: any) => [a.sys.id, a]),
+    );
+
+    const filteredEntries = json.entries.filter(
+      (entry: any) => entry.sys.contentType?.sys?.id === contentType,
+    );
+
+    return filteredEntries.map((entry: any) =>
+      mapper(entry, entriesMap, assetsMap, locale),
+    );
+  } catch (error) {
+    console.error(`Error resolving content type: ${contentType}`, error);
+    throw new Error("Failed to process local data file.");
+  }
 };

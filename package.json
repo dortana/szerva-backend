@@ -36,7 +36,6 @@
     "@prisma/extension-accelerate": "3.0.1",
     "@react-email/components": "1.0.7",
     "bcrypt": "6.0.0",
-    "contentful": "11.10.3",
     "deepl-node": "1.24.0",
     "dotenv": "17.2.3",
     "express": "5.2.1",
