@@ -1,0 +1,9 @@
+# ignore a specific file
+services-data.json
+
+# ignore a folder
+src/generated/
+
+# ignore multiple patterns
+*.log
+dist/
