@@ -3029,106 +3029,6 @@
             "id": "3kbnoh6nxy1s"
           }
         },
-        "id": "3Gy3S9LXS3sDLZZsi4yGBE",
-        "type": "Entry",
-        "createdAt": "2026-04-06T20:44:44.880Z",
-        "updatedAt": "2026-04-11T00:45:06.546Z",
-        "environment": {
-          "sys": {
-            "id": "master",
-            "type": "Link",
-            "linkType": "Environment"
-          }
-        },
-        "publishedVersion": 9,
-        "publishedAt": "2026-04-11T00:45:06.546Z",
-        "firstPublishedAt": "2026-04-06T20:45:57.155Z",
-        "createdBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "032NFDQVtLrbPIIDttU3Qq"
-          }
-        },
-        "updatedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "publishedCounter": 2,
-        "version": 10,
-        "publishedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "fieldStatus": {
-          "*": {
-            "en-US": "published",
-            "hu-HU": "published"
-          }
-        },
-        "automationTags": [
-        ],
-        "contentType": {
-          "sys": {
-            "type": "Link",
-            "linkType": "ContentType",
-            "id": "category"
-          }
-        },
-        "urn": "crn:contentful:::content:spaces/3kbnoh6nxy1s/environments/master/entries/3Gy3S9LXS3sDLZZsi4yGBE"
-      },
-      "fields": {
-        "title": {
-          "en-US": "Pet Training & Behaviour",
-          "hu-HU": "Kisállat-képzés és viselkedési támogatás"
-        },
-        "slug": {
-          "en-US": "pet-training-behaviour"
-        },
-        "icon": {
-          "en-US": {
-            "sys": {
-              "type": "Link",
-              "linkType": "Asset",
-              "id": "r4JylEzwoKeMhF358hcxw"
-            }
-          }
-        },
-        "parentCategory": {
-          "en-US": {
-            "sys": {
-              "type": "Link",
-              "linkType": "Entry",
-              "id": "f9UxKSbstHdM1S1pPAPWV"
-            }
-          }
-        },
-        "isActive": {
-          "en-US": true
-        }
-      }
-    },
-    {
-      "metadata": {
-        "tags": [
-        ],
-        "concepts": [
-        ]
-      },
-      "sys": {
-        "space": {
-          "sys": {
-            "type": "Link",
-            "linkType": "Space",
-            "id": "3kbnoh6nxy1s"
-          }
-        },
         "id": "6PYI5QFm9FwGAnqlj1qg9D",
         "type": "Entry",
         "createdAt": "2026-04-06T20:46:04.647Z",
@@ -5797,106 +5697,6 @@
               "type": "Link",
               "linkType": "Asset",
               "id": "6w0hCg4fknFjOis6B8hDwh"
-            }
-          }
-        },
-        "parentCategory": {
-          "en-US": {
-            "sys": {
-              "type": "Link",
-              "linkType": "Entry",
-              "id": "1Eh62SLCQshjYRyQQKeFND"
-            }
-          }
-        },
-        "isActive": {
-          "en-US": true
-        }
-      }
-    },
-    {
-      "metadata": {
-        "tags": [
-        ],
-        "concepts": [
-        ]
-      },
-      "sys": {
-        "space": {
-          "sys": {
-            "type": "Link",
-            "linkType": "Space",
-            "id": "3kbnoh6nxy1s"
-          }
-        },
-        "id": "cCTOnNBvWnZzWRGsS3cBn",
-        "type": "Entry",
-        "createdAt": "2026-04-10T19:36:19.180Z",
-        "updatedAt": "2026-04-11T01:03:19.095Z",
-        "environment": {
-          "sys": {
-            "id": "master",
-            "type": "Link",
-            "linkType": "Environment"
-          }
-        },
-        "publishedVersion": 8,
-        "publishedAt": "2026-04-11T01:03:19.095Z",
-        "firstPublishedAt": "2026-04-10T19:37:07.174Z",
-        "createdBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "032NFDQVtLrbPIIDttU3Qq"
-          }
-        },
-        "updatedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "publishedCounter": 2,
-        "version": 9,
-        "publishedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "fieldStatus": {
-          "*": {
-            "en-US": "published",
-            "hu-HU": "published"
-          }
-        },
-        "automationTags": [
-        ],
-        "contentType": {
-          "sys": {
-            "type": "Link",
-            "linkType": "ContentType",
-            "id": "category"
-          }
-        },
-        "urn": "crn:contentful:::content:spaces/3kbnoh6nxy1s/environments/master/entries/cCTOnNBvWnZzWRGsS3cBn"
-      },
-      "fields": {
-        "title": {
-          "en-US": "Family, Mediation & Personal Decision Consultation",
-          "hu-HU": "Családi, mediációs és személyes döntési tanácsadás"
-        },
-        "slug": {
-          "en-US": "family-mediation-personal-decision-consultation"
-        },
-        "icon": {
-          "en-US": {
-            "sys": {
-              "type": "Link",
-              "linkType": "Asset",
-              "id": "3K6mqOouTVs0jELvl6qtTJ"
             }
           }
         },
@@ -22338,7 +22138,7 @@
         "id": "3ctpMw60mE3rX9YeLJXEpe",
         "type": "Entry",
         "createdAt": "2026-04-13T21:28:41.177Z",
-        "updatedAt": "2026-04-18T18:41:16.471Z",
+        "updatedAt": "2026-04-22T23:09:48.033Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -22346,8 +22146,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 10,
-        "publishedAt": "2026-04-18T18:41:16.471Z",
+        "publishedVersion": 13,
+        "publishedAt": "2026-04-22T23:09:48.033Z",
         "firstPublishedAt": "2026-04-13T21:29:41.107Z",
         "createdBy": {
           "sys": {
@@ -22363,8 +22163,8 @@
             "id": "032NFDQVtLrbPIIDttU3Qq"
           }
         },
-        "publishedCounter": 2,
-        "version": 11,
+        "publishedCounter": 3,
+        "version": 14,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -22430,7 +22230,7 @@
             "sys": {
               "type": "Link",
               "linkType": "Entry",
-              "id": "cCTOnNBvWnZzWRGsS3cBn"
+              "id": "2zji2OjOBcpcX9AXKH6cbn"
             }
           }
         }
@@ -30895,89 +30695,6 @@
             "id": "3kbnoh6nxy1s"
           }
         },
-        "id": "r4JylEzwoKeMhF358hcxw",
-        "type": "Asset",
-        "createdAt": "2026-04-11T00:44:14.440Z",
-        "updatedAt": "2026-04-11T00:45:03.133Z",
-        "environment": {
-          "sys": {
-            "id": "master",
-            "type": "Link",
-            "linkType": "Environment"
-          }
-        },
-        "publishedVersion": 4,
-        "publishedAt": "2026-04-11T00:45:03.133Z",
-        "firstPublishedAt": "2026-04-11T00:45:03.133Z",
-        "createdBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "updatedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "publishedCounter": 1,
-        "version": 5,
-        "publishedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "fieldStatus": {
-          "*": {
-            "en-US": "published",
-            "hu-HU": "published"
-          }
-        },
-        "urn": "crn:contentful:::content:spaces/3kbnoh6nxy1s/environments/master/assets/r4JylEzwoKeMhF358hcxw"
-      },
-      "fields": {
-        "title": {
-          "en-US": "Pet Training & Behaviour"
-        },
-        "description": {
-          "en-US": "Pet Training & Behaviour"
-        },
-        "file": {
-          "en-US": {
-            "url": "//images.ctfassets.net/3kbnoh6nxy1s/r4JylEzwoKeMhF358hcxw/75b6e17457defadf34b236b4f7d2cd06/Pet_Training___Behaviour.png",
-            "details": {
-              "size": 1300753,
-              "image": {
-                "width": 1080,
-                "height": 1080
-              }
-            },
-            "fileName": "Pet Training & Behaviour.png",
-            "contentType": "image/png"
-          }
-        }
-      }
-    },
-    {
-      "metadata": {
-        "tags": [
-        ],
-        "concepts": [
-        ]
-      },
-      "sys": {
-        "space": {
-          "sys": {
-            "type": "Link",
-            "linkType": "Space",
-            "id": "3kbnoh6nxy1s"
-          }
-        },
         "id": "4QgDuO1YI7EfJwT1zSuyHm",
         "type": "Asset",
         "createdAt": "2026-04-11T00:45:35.147Z",
@@ -31871,89 +31588,6 @@
               }
             },
             "fileName": "Plumbing.png",
-            "contentType": "image/png"
-          }
-        }
-      }
-    },
-    {
-      "metadata": {
-        "tags": [
-        ],
-        "concepts": [
-        ]
-      },
-      "sys": {
-        "space": {
-          "sys": {
-            "type": "Link",
-            "linkType": "Space",
-            "id": "3kbnoh6nxy1s"
-          }
-        },
-        "id": "3K6mqOouTVs0jELvl6qtTJ",
-        "type": "Asset",
-        "createdAt": "2026-04-11T01:02:22.782Z",
-        "updatedAt": "2026-04-11T01:03:16.013Z",
-        "environment": {
-          "sys": {
-            "id": "master",
-            "type": "Link",
-            "linkType": "Environment"
-          }
-        },
-        "publishedVersion": 4,
-        "publishedAt": "2026-04-11T01:03:16.013Z",
-        "firstPublishedAt": "2026-04-11T01:03:16.013Z",
-        "createdBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "updatedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "publishedCounter": 1,
-        "version": 5,
-        "publishedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "fieldStatus": {
-          "*": {
-            "en-US": "published",
-            "hu-HU": "published"
-          }
-        },
-        "urn": "crn:contentful:::content:spaces/3kbnoh6nxy1s/environments/master/assets/3K6mqOouTVs0jELvl6qtTJ"
-      },
-      "fields": {
-        "title": {
-          "en-US": "Family, Mediation & Personal Decision Consultation"
-        },
-        "description": {
-          "en-US": "Family, Mediation & Personal Decision Consultation"
-        },
-        "file": {
-          "en-US": {
-            "url": "//images.ctfassets.net/3kbnoh6nxy1s/3K6mqOouTVs0jELvl6qtTJ/44aea420c42743928ad83b4efea755ff/Family__Mediation___Personal_Decision_Consultation.png",
-            "details": {
-              "size": 984182,
-              "image": {
-                "width": 1080,
-                "height": 1080
-              }
-            },
-            "fileName": "Family, Mediation & Personal Decision Consultation.png",
             "contentType": "image/png"
           }
         }
