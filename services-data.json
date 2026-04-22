@@ -6629,106 +6629,6 @@
             "id": "3kbnoh6nxy1s"
           }
         },
-        "id": "3PvrGGFQRYoGZDEisg5aLO",
-        "type": "Entry",
-        "createdAt": "2026-04-10T19:53:40.813Z",
-        "updatedAt": "2026-04-11T01:23:23.506Z",
-        "environment": {
-          "sys": {
-            "id": "master",
-            "type": "Link",
-            "linkType": "Environment"
-          }
-        },
-        "publishedVersion": 7,
-        "publishedAt": "2026-04-11T01:23:23.506Z",
-        "firstPublishedAt": "2026-04-10T19:54:19.391Z",
-        "createdBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "032NFDQVtLrbPIIDttU3Qq"
-          }
-        },
-        "updatedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "publishedCounter": 2,
-        "version": 8,
-        "publishedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "fieldStatus": {
-          "*": {
-            "en-US": "published",
-            "hu-HU": "published"
-          }
-        },
-        "automationTags": [
-        ],
-        "contentType": {
-          "sys": {
-            "type": "Link",
-            "linkType": "ContentType",
-            "id": "category"
-          }
-        },
-        "urn": "crn:contentful:::content:spaces/3kbnoh6nxy1s/environments/master/entries/3PvrGGFQRYoGZDEisg5aLO"
-      },
-      "fields": {
-        "title": {
-          "en-US": "Packing & Preparation Services",
-          "hu-HU": "Csomagolási és előkészítési szolgáltatások"
-        },
-        "slug": {
-          "en-US": "packing-preparation-services"
-        },
-        "icon": {
-          "en-US": {
-            "sys": {
-              "type": "Link",
-              "linkType": "Asset",
-              "id": "4ZXRcnW70oeUHEa4NT13tP"
-            }
-          }
-        },
-        "parentCategory": {
-          "en-US": {
-            "sys": {
-              "type": "Link",
-              "linkType": "Entry",
-              "id": "1iGY9XOgMoe2t9Xa5UqNlg"
-            }
-          }
-        },
-        "isActive": {
-          "en-US": true
-        }
-      }
-    },
-    {
-      "metadata": {
-        "tags": [
-        ],
-        "concepts": [
-        ]
-      },
-      "sys": {
-        "space": {
-          "sys": {
-            "type": "Link",
-            "linkType": "Space",
-            "id": "3kbnoh6nxy1s"
-          }
-        },
         "id": "2HWmn6T23UY2W7ScZnHzIG",
         "type": "Entry",
         "createdAt": "2026-04-10T19:54:39.120Z",
@@ -28426,6 +28326,122 @@
           }
         }
       }
+    },
+    {
+      "metadata": {
+        "tags": [
+        ],
+        "concepts": [
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "3kbnoh6nxy1s"
+          }
+        },
+        "id": "7oshqrBV0CKKhwp31F9cCX",
+        "type": "Entry",
+        "createdAt": "2026-04-22T21:56:28.613Z",
+        "updatedAt": "2026-04-22T22:00:41.238Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 10,
+        "publishedAt": "2026-04-22T22:00:41.238Z",
+        "firstPublishedAt": "2026-04-22T22:00:41.238Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "032NFDQVtLrbPIIDttU3Qq"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "032NFDQVtLrbPIIDttU3Qq"
+          }
+        },
+        "publishedCounter": 1,
+        "version": 11,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "032NFDQVtLrbPIIDttU3Qq"
+          }
+        },
+        "fieldStatus": {
+          "*": {
+            "en-US": "published",
+            "hu-HU": "published"
+          }
+        },
+        "automationTags": [
+        ],
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "service"
+          }
+        },
+        "urn": "crn:contentful:::content:spaces/3kbnoh6nxy1s/environments/master/entries/7oshqrBV0CKKhwp31F9cCX"
+      },
+      "fields": {
+        "title": {
+          "en-US": "Packing & Preparation Services",
+          "hu-HU": "Csomagolási és előkészítési szolgáltatások"
+        },
+        "description": {
+          "en-US": "Packing and move preparation for homes and offices, including sorting, boxing, labeling, furniture protection, and secure packing of fragile or valuable items for safe and organized relocation or storage.",
+          "hu-HU": "Háztartások és irodák csomagolása és költözési előkészítése, beleértve a válogatást, dobozolást, címkézést, a bútorok védelmét, valamint a törékeny vagy értékes tárgyak biztonságos csomagolását a rendezett költözéshez vagy tároláshoz."
+        },
+        "slug": {
+          "en-US": "packing-preparation-services"
+        },
+        "banner": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Asset",
+              "id": "2SDpvVr0VznL0zOIsIrfea"
+            }
+          }
+        },
+        "isAgreementNeeded": {
+          "en-US": false
+        },
+        "isActive": {
+          "en-US": true
+        },
+        "mainCategory": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "1iGY9XOgMoe2t9Xa5UqNlg"
+            }
+          }
+        },
+        "baseCategory": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "41JGg0CAEEVTGlRx3ifuBt"
+            }
+          }
+        }
+      }
     }
   ],
   "assets": [
@@ -33211,89 +33227,6 @@
               }
             },
             "fileName": "Specialty & Heavy Item Moving.png",
-            "contentType": "image/png"
-          }
-        }
-      }
-    },
-    {
-      "metadata": {
-        "tags": [
-        ],
-        "concepts": [
-        ]
-      },
-      "sys": {
-        "space": {
-          "sys": {
-            "type": "Link",
-            "linkType": "Space",
-            "id": "3kbnoh6nxy1s"
-          }
-        },
-        "id": "4ZXRcnW70oeUHEa4NT13tP",
-        "type": "Asset",
-        "createdAt": "2026-04-11T01:22:44.555Z",
-        "updatedAt": "2026-04-11T01:23:21.102Z",
-        "environment": {
-          "sys": {
-            "id": "master",
-            "type": "Link",
-            "linkType": "Environment"
-          }
-        },
-        "publishedVersion": 4,
-        "publishedAt": "2026-04-11T01:23:21.102Z",
-        "firstPublishedAt": "2026-04-11T01:23:21.102Z",
-        "createdBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "updatedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "publishedCounter": 1,
-        "version": 5,
-        "publishedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "7c2eE61lnHs7TvHUDivWfy"
-          }
-        },
-        "fieldStatus": {
-          "*": {
-            "en-US": "published",
-            "hu-HU": "published"
-          }
-        },
-        "urn": "crn:contentful:::content:spaces/3kbnoh6nxy1s/environments/master/assets/4ZXRcnW70oeUHEa4NT13tP"
-      },
-      "fields": {
-        "title": {
-          "en-US": "Packing & Preparation Services"
-        },
-        "description": {
-          "en-US": "Packing & Preparation Services"
-        },
-        "file": {
-          "en-US": {
-            "url": "//images.ctfassets.net/3kbnoh6nxy1s/4ZXRcnW70oeUHEa4NT13tP/dc161faa36f6e42f98310336c42b2f06/Packing___Preparation_Services.png",
-            "details": {
-              "size": 1186683,
-              "image": {
-                "width": 1080,
-                "height": 1080
-              }
-            },
-            "fileName": "Packing & Preparation Services.png",
             "contentType": "image/png"
           }
         }
@@ -53815,10 +53748,10 @@
             "id": "3kbnoh6nxy1s"
           }
         },
-        "id": "4MDlz22fzjeMeXyJAwLMG0",
+        "id": "2SDpvVr0VznL0zOIsIrfea",
         "type": "Asset",
-        "createdAt": "2026-04-22T20:04:57.460Z",
-        "updatedAt": "2026-04-22T20:05:14.116Z",
+        "createdAt": "2026-04-22T21:59:21.162Z",
+        "updatedAt": "2026-04-22T21:59:49.515Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -53827,8 +53760,8 @@
           }
         },
         "publishedVersion": 4,
-        "publishedAt": "2026-04-22T20:05:14.116Z",
-        "firstPublishedAt": "2026-04-22T20:05:14.116Z",
+        "publishedAt": "2026-04-22T21:59:49.515Z",
+        "firstPublishedAt": "2026-04-22T21:59:49.515Z",
         "createdBy": {
           "sys": {
             "type": "Link",
@@ -53858,7 +53791,7 @@
             "hu-HU": "published"
           }
         },
-        "urn": "crn:contentful:::content:spaces/3kbnoh6nxy1s/environments/master/assets/4MDlz22fzjeMeXyJAwLMG0"
+        "urn": "crn:contentful:::content:spaces/3kbnoh6nxy1s/environments/master/assets/2SDpvVr0VznL0zOIsIrfea"
       },
       "fields": {
         "title": {
@@ -53869,7 +53802,7 @@
         },
         "file": {
           "en-US": {
-            "url": "//images.ctfassets.net/3kbnoh6nxy1s/4MDlz22fzjeMeXyJAwLMG0/4f1e4759284ded9f4c0525d0fa56210d/16.jpg",
+            "url": "//images.ctfassets.net/3kbnoh6nxy1s/2SDpvVr0VznL0zOIsIrfea/b0cfbaf24b3947281d9e152608fde128/16.jpg",
             "details": {
               "size": 193451,
               "image": {
