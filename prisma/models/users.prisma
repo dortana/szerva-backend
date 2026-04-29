@@ -11,6 +11,8 @@ model User {
 
     passwordHash String
 
+    googleId String? @unique
+
     image  String?
     role   UserRole   @default(CUSTOMER)
     status UserStatus @default(NEW)
