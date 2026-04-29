@@ -113,7 +113,7 @@ export const googleAuthHandler = async (req: Request, res: Response) => {
     }
 
     if (!existingUser) {
-      return res.status(409).json({
+      return res.status(404).json({
         message: t("No user found with this email"),
       });
     }
