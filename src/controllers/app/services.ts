@@ -7,6 +7,11 @@ import {
   mapSingleService,
 } from "@/config/contentful/mappers";
 import { ServiceCarouselDto, ServiceDto } from "@/config/contentful/types";
+import { getServicesFromContentful } from "@/config/contentful-dev/helper";
+import {
+  mapServicesResult,
+  mapServicesSingleResult,
+} from "@/config/contentful-dev/mappers";
 
 export const getServices = async (req: Request, res: Response) => {
   const locale = getCurrentLanguage();
@@ -14,6 +19,22 @@ export const getServices = async (req: Request, res: Response) => {
   const baseSlug = req.query.baseSlug as string | undefined;
 
   try {
+    if (process.env.NODE_ENV === "development") {
+      //TODO: Remove this once we have the contentful integration working
+      const services = await getServicesFromContentful({
+        locale,
+        ...(slug && { slug }),
+        ...(baseSlug && { baseSlug }),
+      });
+
+      if (slug) {
+        return res
+          .status(200)
+          .json({ services: mapServicesSingleResult(services) });
+      } else {
+        return res.status(200).json({ services: mapServicesResult(services) });
+      }
+    }
     //@ts-ignore
     const allServices: ServiceDto[] = await getEntriesByType(
       "service",
