@@ -23,22 +23,17 @@ const resolveAssetUrl = (
   return file?.url ? `https:${file.url}` : undefined;
 };
 
-const mapCategorySummary = (
-  catEntry: any,
-  assetsMap: Map<string, any>,
-  locale: string,
-) => {
+const mapCategorySummary = (catEntry: any, locale: string) => {
   if (!catEntry || !catEntry.fields) {
     return undefined;
   }
   const v = (field: any) => getLocaleValue(field, locale);
-  const iconUrl = resolveAssetUrl(v(catEntry.fields.icon), assetsMap, locale);
 
   return {
     id: catEntry.sys.id,
     title: v(catEntry.fields.title),
     slug: v(catEntry.fields.slug),
-    ...(iconUrl !== undefined ? { iconUrl } : {}),
+    iconUrl: v(catEntry.fields.iconUrl),
     isActive: v(catEntry.fields.isActive) ?? false,
   };
 };
@@ -82,20 +77,18 @@ export const mapQuestion = (
 export const mapCategory = (
   entry: any,
   entriesMap: Map<string, any>,
-  assetsMap: Map<string, any>,
   locale: string,
 ): any => {
   const v = (field: any) => getLocaleValue(field, locale);
 
   const rawParent = entriesMap.get(v(entry.fields.parentCategory)?.sys.id);
-  const iconUrl = resolveAssetUrl(v(entry.fields.icon), assetsMap, locale);
-  const parentCategory = mapCategorySummary(rawParent, assetsMap, locale);
+  const parentCategory = mapCategorySummary(rawParent, locale);
 
   return {
     id: entry.sys.id,
     title: v(entry.fields.title),
     slug: v(entry.fields.slug),
-    ...(iconUrl !== undefined ? { iconUrl } : {}),
+    iconUrl: v(entry.fields.iconUrl),
     isActive: v(entry.fields.isActive) ?? false,
     ...(parentCategory !== undefined ? { parentCategory } : {}),
   };
@@ -104,23 +97,21 @@ export const mapCategory = (
 export const mapSingleService = (
   entry: any,
   entriesMap: Map<string, any>,
-  assetsMap: Map<string, any>,
   locale: string,
 ) => {
   const v = (field: any) => getLocaleValue(field, locale);
 
   const mainCatRaw = entriesMap.get(v(entry.fields.mainCategory)?.sys.id);
   const baseCatRaw = entriesMap.get(v(entry.fields.baseCategory)?.sys.id);
-  const bannerUrl = resolveAssetUrl(v(entry.fields.banner), assetsMap, locale);
-  const mainCategory = mapCategorySummary(mainCatRaw, assetsMap, locale);
-  const baseCategory = mapCategorySummary(baseCatRaw, assetsMap, locale);
+  const mainCategory = mapCategorySummary(mainCatRaw, locale);
+  const baseCategory = mapCategorySummary(baseCatRaw, locale);
 
   return {
     id: entry.sys.id,
     title: v(entry.fields.title),
     description: v(entry.fields.description),
     slug: v(entry.fields.slug),
-    ...(bannerUrl !== undefined ? { bannerUrl } : {}),
+    iconUrl: v(entry.fields.iconUrl),
     isAgreementNeeded: v(entry.fields.isAgreementNeeded) ?? false,
     isActive: v(entry.fields.isActive) ?? false,
     mainCategory,
@@ -135,12 +126,7 @@ export const mapSingleService = (
 export const getEntriesByType = async <T>(
   contentType: string,
   locale: string,
-  mapper: (
-    entry: any,
-    entriesMap: Map<string, any>,
-    assetsMap: Map<string, any>,
-    locale: string,
-  ) => T,
+  mapper: (entry: any, entriesMap: Map<string, any>, locale: string) => T,
 ): Promise<T[]> => {
   try {
     const rawData = await fs.readFile(
@@ -161,7 +147,7 @@ export const getEntriesByType = async <T>(
     );
 
     return filteredEntries.map((entry: any) =>
-      mapper(entry, entriesMap, assetsMap, locale),
+      mapper(entry, entriesMap, locale),
     );
   } catch (error) {
     console.error(`Error resolving content type: ${contentType}`, error);
@@ -172,7 +158,6 @@ export const getEntriesByType = async <T>(
 export const mapServiceCarousel = (
   entry: any,
   entriesMap: Map<string, any>,
-  assetsMap: Map<string, any>,
   locale: string,
 ): ServiceCarouselDto => {
   const v = (field: any) => getLocaleValue(field, locale);
@@ -186,7 +171,7 @@ export const mapServiceCarousel = (
       .map((link: any) => entriesMap.get(link.sys.id))
       .filter(Boolean)
       .map((s: any) => {
-        const fullService = mapSingleService(s, entriesMap, assetsMap, locale);
+        const fullService = mapSingleService(s, entriesMap, locale);
 
         // Remove questions, mainCategory, and baseCategory
         const { questions, mainCategory, baseCategory, ...leanService } =

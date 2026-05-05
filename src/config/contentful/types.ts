@@ -50,7 +50,7 @@ export type ServiceDto = {
   title: string;
   description: string;
   slug: string;
-  bannerUrl?: string;
+  iconUrl?: string;
   isAgreementNeeded?: boolean;
   isActive: boolean;
 

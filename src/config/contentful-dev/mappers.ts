@@ -29,7 +29,7 @@ export const mapCategory = (
     id: entry.sys.id,
     title: entry.fields.title,
     slug: entry.fields.slug,
-    iconUrl: assetToUrl(entry.fields.icon),
+    iconUrl: entry.fields.iconUrl,
     isActive: entry.fields.isActive,
     //@ts-ignore
     parentCategory: parent
@@ -37,7 +37,7 @@ export const mapCategory = (
           id: parent.sys.id,
           title: parent.fields.title,
           slug: parent.fields.slug,
-          iconUrl: assetToUrl(parent.fields.icon),
+          iconUrl: parent.fields.iconUrl,
           isActive: parent.fields.isActive,
         }
       : undefined,
@@ -80,8 +80,7 @@ export const mapServiceBulk = (
     title: entry.fields.title,
     description: entry.fields.description,
     slug: entry.fields.slug,
-    jobTitle: entry.fields.jobTitle,
-    iconUrl: assetToUrl(entry.fields.icon),
+    iconUrl: entry.fields.iconUrl,
     isAgreementNeeded: entry.fields.isAgreementNeeded,
     isActive: entry.fields.isActive,
     mainCategory: { slug: entry.fields.mainCategory.fields.slug },
@@ -104,7 +103,7 @@ export const mapSingleService = (
     title: entry.fields.title,
     description: entry.fields.description,
     slug: entry.fields.slug,
-    bannerUrl: assetToUrl(entry.fields.banner),
+    iconUrl: entry.fields.iconUrl,
     isAgreementNeeded: entry.fields.isAgreementNeeded,
     isActive: entry.fields.isActive,
     mainCategory: mapCategory(entry.fields.mainCategory),

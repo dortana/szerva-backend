@@ -65,9 +65,7 @@ export interface IServiceFields {
   title: EntryFieldTypes.Text;
   description: EntryFieldTypes.Text;
   slug: EntryFieldTypes.Symbol;
-  jobTitle: EntryFieldTypes.Text;
-  icon: EntryFieldTypes.AssetLink;
-  banner: EntryFieldTypes.AssetLink;
+  iconUrl: EntryFieldTypes.Text;
   agreementFile?: EntryFieldTypes.AssetLink;
   isAgreementNeeded?: EntryFieldTypes.Boolean;
   isActive: EntryFieldTypes.Boolean;
@@ -79,7 +77,7 @@ export interface IServiceFields {
 export interface ICategoryFields {
   title: EntryFieldTypes.Text;
   slug: EntryFieldTypes.Symbol;
-  icon: EntryFieldTypes.AssetLink;
+  iconUrl: EntryFieldTypes.Text;
   isActive: EntryFieldTypes.Boolean;
   description?: EntryFieldTypes.Text;
   parentCategory?: EntryFieldTypes.EntryLink<CategorySkeleton>;
